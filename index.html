@@ -33,6 +33,8 @@
     --green-l: #97C459;
     --green-dim: rgba(99,153,34,0.12);
     --red: #E24B4A;
+    --red-l: #F09595;
+    --red-dim: rgba(226,75,74,0.12);
     --check-on: #1D9E75;
   }
 
@@ -91,7 +93,6 @@
     letter-spacing: 4px;
     color: var(--text);
     animation: fadeUp 0.6s 0.1s ease both;
-    position: relative;
   }
   h1 span { color: var(--purple); }
 
@@ -120,8 +121,58 @@
   .meta-pill.amber { color: var(--amber-l); border-color: rgba(239,159,39,0.3); background: var(--amber-dim); }
   .meta-pill.blue { color: var(--blue-l); border-color: rgba(55,138,221,0.3); background: var(--blue-dim); }
 
+  /* COUNTDOWN STRIP */
+  .countdown-strip {
+    display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;
+    margin-top: 20px;
+    animation: fadeUp 0.6s 0.35s ease both;
+  }
+  .cd-card {
+    border-radius: 12px; padding: 12px 18px;
+    border: 1px solid var(--border);
+    background: var(--bg2);
+    text-align: center; min-width: 110px;
+  }
+  .cd-card.phy { border-color: rgba(55,138,221,0.3); background: var(--blue-dim); }
+  .cd-card.chem { border-color: rgba(29,158,117,0.3); background: var(--teal-dim); }
+  .cd-card.math { border-color: rgba(239,159,39,0.3); background: var(--amber-dim); }
+  .cd-days {
+    font-family: 'Bebas Neue', sans-serif; font-size: 32px; line-height: 1;
+  }
+  .cd-card.phy .cd-days { color: var(--blue-l); }
+  .cd-card.chem .cd-days { color: var(--teal-l); }
+  .cd-card.math .cd-days { color: var(--amber-l); }
+  .cd-label { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted2); margin-top: 4px; letter-spacing: 1px; text-transform: uppercase; }
+
+  /* TODAY BANNER */
+  .today-banner {
+    margin: 24px 0 0;
+    border-radius: 12px;
+    border: 1px solid rgba(127,119,221,0.35);
+    background: var(--purple-dim);
+    padding: 14px 20px;
+    display: flex; align-items: center; gap: 14px;
+    animation: fadeUp 0.6s 0.4s ease both;
+  }
+  .today-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--purple-l);
+    flex-shrink: 0;
+    box-shadow: 0 0 8px rgba(127,119,221,0.6);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+  .today-text { flex: 1; }
+  .today-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--purple-l); text-transform: uppercase; margin-bottom: 3px; }
+  .today-title { font-size: 14px; font-weight: 600; }
+  .today-sub { font-size: 12px; color: var(--muted2); margin-top: 2px; }
+  .today-streak { font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: var(--purple-l); flex-shrink: 0; }
+
   /* PROGRESS BAR */
-  .progress-wrap { margin: 40px 0 16px; animation: fadeUp 0.6s 0.35s ease both; }
+  .progress-wrap { margin: 28px 0 16px; animation: fadeUp 0.6s 0.4s ease both; }
   .progress-label {
     display: flex; justify-content: space-between;
     font-family: 'DM Mono', monospace; font-size: 11px;
@@ -133,9 +184,9 @@
     border: 1px solid var(--border);
   }
   .progress-fill {
-    height: 100%; background: var(--purple);
+    height: 100%; background: linear-gradient(90deg, var(--purple), var(--teal));
     border-radius: 2px;
-    transition: width 0.4s ease;
+    transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
   }
 
   /* SECTION LABEL */
@@ -164,6 +215,7 @@
     user-select: none;
   }
   .phase-header:hover { background: rgba(255,255,255,0.02); }
+  .phase-block.collapsed .phase-header { border-bottom-color: transparent; }
   .phase-badge {
     font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 1px;
     padding: 4px 12px; border-radius: 8px;
@@ -171,15 +223,22 @@
   }
   .ph-purple { background: var(--purple-dim); color: var(--purple-l); border: 1px solid rgba(127,119,221,0.2); }
   .ph-amber { background: var(--amber-dim); color: var(--amber-l); border: 1px solid rgba(239,159,39,0.2); }
-  .ph-red { background: rgba(226,75,74,0.1); color: #F09595; border: 1px solid rgba(226,75,74,0.2); }
+  .ph-red { background: var(--red-dim); color: var(--red-l); border: 1px solid rgba(226,75,74,0.2); }
 
   .phase-title-text { flex: 1; }
   .phase-title-text strong { font-size: 15px; font-weight: 600; display: block; }
   .phase-title-text small { font-size: 12px; color: var(--muted2); font-family: 'DM Mono', monospace; }
+
+  .phase-progress-mini {
+    font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted);
+    flex-shrink: 0;
+  }
+
   .phase-chevron {
     color: var(--muted); font-size: 12px;
-    transition: transform 0.2s;
+    transition: transform 0.25s;
     font-family: 'DM Mono', monospace;
+    flex-shrink: 0;
   }
   .phase-block.collapsed .phase-chevron { transform: rotate(-90deg); }
   .phase-body { padding: 8px 0; }
@@ -192,16 +251,40 @@
     border-bottom: 1px solid var(--border);
     transition: background 0.15s;
     cursor: pointer;
+    position: relative;
   }
   .task-row:last-child { border-bottom: none; }
   .task-row:hover { background: rgba(255,255,255,0.025); }
-  .task-row.done { opacity: 0.5; }
+  .task-row.done { opacity: 0.45; }
   .task-row.done .task-title { text-decoration: line-through; }
+
+  /* TODAY highlight */
+  .task-row.is-today {
+    background: rgba(127,119,221,0.06);
+    border-left: 2px solid var(--purple);
+    padding-left: 18px;
+  }
+  .task-row.is-today:hover { background: rgba(127,119,221,0.10); }
+  .today-tag {
+    font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--purple-l);
+    background: var(--purple-dim); border: 1px solid rgba(127,119,221,0.3);
+    padding: 2px 7px; border-radius: 10px;
+    display: inline-block; margin-left: 8px; vertical-align: middle;
+  }
+
+  /* EXAM DAY highlight */
+  .task-row.exam-day {
+    background: rgba(226,75,74,0.05);
+    border-left: 2px solid var(--red);
+    padding-left: 18px;
+  }
+  .task-row.exam-day:hover { background: rgba(226,75,74,0.09); }
 
   .checkbox {
     width: 20px; height: 20px; border-radius: 6px;
     border: 1.5px solid var(--border2);
-    flex-shrink: 0; margin-top: 1px;
+    flex-shrink: 0; margin-top: 2px;
     display: flex; align-items: center; justify-content: center;
     transition: all 0.2s;
     background: var(--bg3);
@@ -222,19 +305,21 @@
   .task-sub { font-size: 12px; color: var(--muted2); margin-top: 3px; line-height: 1.4; }
 
   .subj-dot {
-    width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 7px;
+    width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 8px;
   }
   .dot-teal { background: var(--teal); }
   .dot-amber { background: var(--amber); }
   .dot-blue { background: var(--blue); }
   .dot-green { background: var(--green-l); }
   .dot-purple { background: var(--purple); }
+  .dot-red { background: var(--red); }
 
   .date-teal { color: var(--teal-l); }
   .date-amber { color: var(--amber-l); }
   .date-blue { color: var(--blue-l); }
   .date-green { color: var(--green-l); }
   .date-purple { color: var(--purple-l); }
+  .date-red { color: var(--red-l); }
 
   /* EXAM CARDS */
   .exam-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-top: 12px; }
@@ -242,16 +327,31 @@
     border-radius: 12px; padding: 18px 20px;
     border: 1px solid var(--border);
     background: var(--bg2);
+    position: relative; overflow: hidden;
   }
-  .exam-card.phy { border-color: rgba(55,138,221,0.3); background: var(--blue-dim); }
-  .exam-card.chem { border-color: rgba(29,158,117,0.3); background: var(--teal-dim); }
-  .exam-card.math { border-color: rgba(239,159,39,0.3); background: var(--amber-dim); }
+  .exam-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  }
+  .exam-card.phy { border-color: rgba(55,138,221,0.35); background: var(--blue-dim); }
+  .exam-card.phy::before { background: var(--blue); }
+  .exam-card.chem { border-color: rgba(29,158,117,0.35); background: var(--teal-dim); }
+  .exam-card.chem::before { background: var(--teal); }
+  .exam-card.math { border-color: rgba(239,159,39,0.35); background: var(--amber-dim); }
+  .exam-card.math::before { background: var(--amber); }
   .exam-subj { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 1px; margin-bottom: 4px; }
   .exam-card.phy .exam-subj { color: var(--blue-l); }
   .exam-card.chem .exam-subj { color: var(--teal-l); }
   .exam-card.math .exam-subj { color: var(--amber-l); }
   .exam-date { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--muted2); }
   .exam-topics { font-size: 12px; color: var(--muted2); margin-top: 8px; line-height: 1.5; }
+  .exam-countdown-badge {
+    position: absolute; top: 14px; right: 14px;
+    font-family: 'Bebas Neue', sans-serif; font-size: 13px;
+    padding: 3px 8px; border-radius: 8px;
+  }
+  .exam-card.phy .exam-countdown-badge { background: rgba(55,138,221,0.2); color: var(--blue-l); }
+  .exam-card.chem .exam-countdown-badge { background: rgba(29,158,117,0.2); color: var(--teal-l); }
+  .exam-card.math .exam-countdown-badge { background: rgba(239,159,39,0.2); color: var(--amber-l); }
 
   /* DAILY ROUTINE */
   .routine-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 12px; }
@@ -266,6 +366,16 @@
   .s1 .slot-time { color: var(--purple-l); }
   .s2 .slot-time { color: var(--teal-l); }
   .s3 .slot-time { color: var(--amber-l); }
+
+  /* STREAK */
+  .streak-bar {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    margin: 24px 0 0;
+    font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted);
+    animation: fadeUp 0.6s 0.45s ease both;
+  }
+  .streak-fire { font-size: 20px; }
+  .streak-count { font-size: 13px; color: var(--amber-l); }
 
   /* RESET */
   .reset-btn {
@@ -295,6 +405,8 @@
     .routine-grid { grid-template-columns: 1fr; }
     .exam-grid { grid-template-columns: 1fr; }
     h1 { font-size: 72px; }
+    .countdown-strip { gap: 8px; }
+    .cd-card { min-width: 90px; padding: 10px 12px; }
   }
 </style>
 </head>
@@ -313,10 +425,38 @@
       <span class="meta-pill teal">Chem → 14 May</span>
       <span class="meta-pill blue">Physics → 13 May</span>
       <span class="meta-pill amber">Maths → 18 May</span>
-      <span class="meta-pill">18 days · 3–4 hrs/day</span>
+      <span class="meta-pill">22 days · 3–4 hrs/day</span>
+    </div>
+
+    <!-- COUNTDOWN -->
+    <div class="countdown-strip">
+      <div class="cd-card phy">
+        <div class="cd-days" id="cd-phy">—</div>
+        <div class="cd-label">days to Physics</div>
+      </div>
+      <div class="cd-card chem">
+        <div class="cd-days" id="cd-chem">—</div>
+        <div class="cd-label">days to Chem</div>
+      </div>
+      <div class="cd-card math">
+        <div class="cd-days" id="cd-math">—</div>
+        <div class="cd-label">days to Maths</div>
+      </div>
     </div>
   </header>
 
+  <!-- TODAY BANNER -->
+  <div class="today-banner" id="today-banner">
+    <div class="today-dot"></div>
+    <div class="today-text">
+      <div class="today-label">Today's task</div>
+      <div class="today-title" id="today-title">Loading…</div>
+      <div class="today-sub" id="today-sub"></div>
+    </div>
+    <div class="today-streak" id="streak-display">🔥</div>
+  </div>
+
+  <!-- PROGRESS BAR -->
   <div class="progress-wrap">
     <div class="progress-label">
       <span>Overall progress</span>
@@ -335,33 +475,15 @@
       <div class="phase-badge ph-purple">P1</div>
       <div class="phase-title-text">
         <strong>Foundation — Cover everything once</strong>
-        <small>Apr 24 – May 7</small>
+        <small>Apr 26 – May 9</small>
       </div>
+      <div class="phase-progress-mini" id="pp1">0/14</div>
       <div class="phase-chevron">▼</div>
     </div>
     <div class="phase-body">
 
-      <div class="task-row" id="t1" onclick="toggle('t1')">
-        <div class="checkbox"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="subj-dot dot-teal"></div>
-        <div class="task-info">
-          <div class="task-date date-teal">APR 24 – THU</div>
-          <div class="task-title">Solutions — Part 1</div>
-          <div class="task-sub">Molarity, molality, mole fraction, normality · NCERT read + notes</div>
-        </div>
-      </div>
-
-      <div class="task-row" id="t2" onclick="toggle('t2')">
-        <div class="checkbox"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="subj-dot dot-teal"></div>
-        <div class="task-info">
-          <div class="task-date date-teal">APR 25 – FRI</div>
-          <div class="task-title">Solutions — Part 2</div>
-          <div class="task-sub">Colligative properties: vapour pressure, boiling pt elevation, osmotic pressure + 15 Qs</div>
-        </div>
-      </div>
-
-      <div class="task-row" id="t3" onclick="toggle('t3')">
+      <!-- APR 26: Matrices P1 (was wasted, now Day 1) -->
+      <div class="task-row" id="t1" data-date="2026-04-26" onclick="toggle('t1')">
         <div class="checkbox"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <div class="subj-dot dot-amber"></div>
         <div class="task-info">
@@ -371,7 +493,7 @@
         </div>
       </div>
 
-      <div class="task-row" id="t4" onclick="toggle('t4')">
+      <div class="task-row" id="t2" data-date="2026-04-27" onclick="toggle('t2')">
         <div class="checkbox"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <div class="subj-dot dot-amber"></div>
         <div class="task-info">
@@ -381,101 +503,121 @@
         </div>
       </div>
 
-      <div class="task-row" id="t5" onclick="toggle('t5')">
+      <div class="task-row" id="t3" data-date="2026-04-28" onclick="toggle('t3')">
+        <div class="checkbox"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="subj-dot dot-teal"></div>
+        <div class="task-info">
+          <div class="task-date date-teal">APR 28 – MON</div>
+          <div class="task-title">Solutions — Part 1</div>
+          <div class="task-sub">Molarity, molality, mole fraction, normality · NCERT read + notes</div>
+        </div>
+      </div>
+
+      <div class="task-row" id="t4" data-date="2026-04-29" onclick="toggle('t4')">
+        <div class="checkbox"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="subj-dot dot-teal"></div>
+        <div class="task-info">
+          <div class="task-date date-teal">APR 29 – TUE</div>
+          <div class="task-title">Solutions — Part 2</div>
+          <div class="task-sub">Colligative properties: vapour pressure, boiling pt elevation, osmotic pressure + 15 Qs</div>
+        </div>
+      </div>
+
+      <div class="task-row" id="t5" data-date="2026-04-30" onclick="toggle('t5')">
         <div class="checkbox"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <div class="subj-dot dot-amber"></div>
         <div class="task-info">
-          <div class="task-date date-amber">APR 28 – MON</div>
+          <div class="task-date date-amber">APR 30 – WED</div>
           <div class="task-title">Relations &amp; Functions — Part 1</div>
           <div class="task-sub">Types of relations, reflexive / symmetric / transitive, equivalence relations</div>
         </div>
       </div>
 
-      <div class="task-row" id="t6" onclick="toggle('t6')">
+      <div class="task-row" id="t6" data-date="2026-05-01" onclick="toggle('t6')">
         <div class="checkbox"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <div class="subj-dot dot-amber"></div>
         <div class="task-info">
-          <div class="task-date date-amber">APR 29 – TUE</div>
+          <div class="task-date date-amber">MAY 01 – THU</div>
           <div class="task-title">Relations &amp; Functions — Part 2</div>
           <div class="task-sub">One-one, onto, bijective, composition, inverse functions + 15 Qs</div>
         </div>
       </div>
 
-      <div class="task-row" id="t7" onclick="toggle('t7')">
+      <div class="task-row" id="t7" data-date="2026-05-02" onclick="toggle('t7')">
         <div class="checkbox"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <div class="subj-dot dot-teal"></div>
         <div class="task-info">
-          <div class="task-date date-teal">APR 30 – WED</div>
+          <div class="task-date date-teal">MAY 02 – FRI</div>
           <div class="task-title">Electrochemistry — Part 1</div>
           <div class="task-sub">Galvanic cells, standard electrode potential, EMF, Nernst equation</div>
         </div>
       </div>
 
-      <div class="task-row" id="t8" onclick="toggle('t8')">
+      <div class="task-row" id="t8" data-date="2026-05-03" onclick="toggle('t8')">
         <div class="checkbox"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <div class="subj-dot dot-teal"></div>
         <div class="task-info">
-          <div class="task-date date-teal">MAY 01 – THU</div>
+          <div class="task-date date-teal">MAY 03 – SAT</div>
           <div class="task-title">Electrochemistry — Part 2</div>
           <div class="task-sub">Electrolysis, Faraday laws, conductance, Kohlrausch law + 15 Qs</div>
         </div>
       </div>
 
-      <div class="task-row" id="t9" onclick="toggle('t9')">
+      <div class="task-row" id="t9" data-date="2026-05-04" onclick="toggle('t9')">
         <div class="checkbox"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <div class="subj-dot dot-blue"></div>
         <div class="task-info">
-          <div class="task-date date-blue">MAY 02 – FRI</div>
+          <div class="task-date date-blue">MAY 04 – SUN</div>
           <div class="task-title">Electric Charges &amp; Fields — Part 1</div>
           <div class="task-sub">Coulomb's law, superposition, electric field, field lines, Gauss's law</div>
         </div>
       </div>
 
-      <div class="task-row" id="t10" onclick="toggle('t10')">
+      <div class="task-row" id="t10" data-date="2026-05-05" onclick="toggle('t10')">
         <div class="checkbox"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <div class="subj-dot dot-blue"></div>
         <div class="task-info">
-          <div class="task-date date-blue">MAY 03 – SAT</div>
+          <div class="task-date date-blue">MAY 05 – MON</div>
           <div class="task-title">Electric Charges &amp; Fields — Part 2</div>
           <div class="task-sub">Applications of Gauss's law, electric dipole + 15 numericals</div>
         </div>
       </div>
 
-      <div class="task-row" id="t11" onclick="toggle('t11')">
+      <div class="task-row" id="t11" data-date="2026-05-06" onclick="toggle('t11')">
         <div class="checkbox"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <div class="subj-dot dot-teal"></div>
         <div class="task-info">
-          <div class="task-date date-teal">MAY 04 – SUN</div>
+          <div class="task-date date-teal">MAY 06 – TUE</div>
           <div class="task-title">Chemical Kinetics — Part 1</div>
           <div class="task-sub">Rate of reaction, rate law, order, molecularity, integrated rate equations</div>
         </div>
       </div>
 
-      <div class="task-row" id="t12" onclick="toggle('t12')">
+      <div class="task-row" id="t12" data-date="2026-05-07" onclick="toggle('t12')">
         <div class="checkbox"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <div class="subj-dot dot-teal"></div>
         <div class="task-info">
-          <div class="task-date date-teal">MAY 05 – MON</div>
+          <div class="task-date date-teal">MAY 07 – WED</div>
           <div class="task-title">Chemical Kinetics — Part 2</div>
           <div class="task-sub">Arrhenius equation, activation energy, half-life, temp dependence + 15 Qs</div>
         </div>
       </div>
 
-      <div class="task-row" id="t13" onclick="toggle('t13')">
+      <div class="task-row" id="t13" data-date="2026-05-08" onclick="toggle('t13')">
         <div class="checkbox"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <div class="subj-dot dot-blue"></div>
         <div class="task-info">
-          <div class="task-date date-blue">MAY 06 – TUE</div>
+          <div class="task-date date-blue">MAY 08 – THU</div>
           <div class="task-title">Electric Potential &amp; Capacitance — Part 1</div>
           <div class="task-sub">Potential, potential energy, equipotential surfaces, relation with E field</div>
         </div>
       </div>
 
-      <div class="task-row" id="t14" onclick="toggle('t14')">
+      <div class="task-row" id="t14" data-date="2026-05-09" onclick="toggle('t14')">
         <div class="checkbox"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <div class="subj-dot dot-blue"></div>
         <div class="task-info">
-          <div class="task-date date-blue">MAY 07 – WED</div>
+          <div class="task-date date-blue">MAY 09 – FRI</div>
           <div class="task-title">Electric Potential &amp; Capacitance — Part 2</div>
           <div class="task-sub">Capacitors, series/parallel combos, energy stored, dielectrics + 15 Qs</div>
         </div>
@@ -490,49 +632,50 @@
       <div class="phase-badge ph-amber">P2</div>
       <div class="phase-title-text">
         <strong>Practice sprint — Determinants + Mega revision</strong>
-        <small>May 8 – May 11</small>
+        <small>May 10 – May 12</small>
       </div>
+      <div class="phase-progress-mini" id="pp2">0/4</div>
       <div class="phase-chevron">▼</div>
     </div>
     <div class="phase-body">
 
-      <div class="task-row" id="t15" onclick="toggle('t15')">
+      <div class="task-row" id="t15" data-date="2026-05-10" onclick="toggle('t15')">
         <div class="checkbox"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <div class="subj-dot dot-amber"></div>
         <div class="task-info">
-          <div class="task-date date-amber">MAY 08 – THU</div>
+          <div class="task-date date-amber">MAY 10 – SAT</div>
           <div class="task-title">Determinants — Part 1</div>
           <div class="task-sub">Properties, expansion along rows/cols, minors, cofactors, adjoint</div>
         </div>
       </div>
 
-      <div class="task-row" id="t16" onclick="toggle('t16')">
+      <div class="task-row" id="t16" data-date="2026-05-11" onclick="toggle('t16')">
         <div class="checkbox"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <div class="subj-dot dot-amber"></div>
         <div class="task-info">
-          <div class="task-date date-amber">MAY 09 – FRI</div>
+          <div class="task-date date-amber">MAY 11 – SUN</div>
           <div class="task-title">Determinants — Part 2</div>
           <div class="task-sub">Inverse via adjoint, Cramer's rule, solve linear equations + 20 problems</div>
         </div>
       </div>
 
-      <div class="task-row" id="t17" onclick="toggle('t17')">
+      <div class="task-row" id="t17" data-date="2026-05-12" onclick="toggle('t17')">
         <div class="checkbox"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <div class="subj-dot dot-green"></div>
         <div class="task-info">
-          <div class="task-date date-green">MAY 10 – SAT</div>
+          <div class="task-date date-green">MAY 12 – MON</div>
           <div class="task-title">Full Maths mega revision</div>
           <div class="task-sub">All 3 chapters mixed — 30 questions timed, formula sheet review</div>
         </div>
       </div>
 
-      <div class="task-row" id="t18" onclick="toggle('t18')">
+      <div class="task-row" id="t18" data-date="2026-05-12" onclick="toggle('t18')">
         <div class="checkbox"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="subj-dot dot-green"></div>
+        <div class="subj-dot dot-blue"></div>
         <div class="task-info">
-          <div class="task-date date-green">MAY 11 – SUN</div>
-          <div class="task-title">Full Physics mega revision</div>
-          <div class="task-sub">Both chapters mixed — 20 numericals + formula sheet, identify weak spots</div>
+          <div class="task-date date-blue">MAY 12 – MON NIGHT</div>
+          <div class="task-title">Physics formula card only</div>
+          <div class="task-sub">No new topics. Formula sheet + sleep by 10:30 PM</div>
         </div>
       </div>
 
@@ -545,53 +688,54 @@
       <div class="phase-badge ph-red">P3</div>
       <div class="phase-title-text">
         <strong>Exam week — Final polish</strong>
-        <small>May 12 – May 18</small>
+        <small>May 13 – May 18</small>
       </div>
+      <div class="phase-progress-mini" id="pp3">0/6</div>
       <div class="phase-chevron">▼</div>
     </div>
     <div class="phase-body">
 
-      <div class="task-row" id="t19" onclick="toggle('t19')">
-        <div class="checkbox"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="subj-dot dot-blue"></div>
-        <div class="task-info">
-          <div class="task-date date-blue">MAY 12 – MON NIGHT</div>
-          <div class="task-title">Physics formula card only</div>
-          <div class="task-sub">No new topics. Formula sheet + sleep by 10:30 PM</div>
-        </div>
-      </div>
-
-      <div class="task-row" id="t20" onclick="toggle('t20')">
+      <div class="task-row exam-day" id="t19" data-date="2026-05-13" onclick="toggle('t19')">
         <div class="checkbox"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <div class="subj-dot dot-blue"></div>
         <div class="task-info">
           <div class="task-date date-blue">MAY 13 – TUE · EXAM DAY</div>
-          <div class="task-title">PHYSICS EXAM — 7:30 AM</div>
+          <div class="task-title">⚡ PHYSICS EXAM — 7:30 AM</div>
           <div class="task-sub">Electric Charges &amp; Fields + Electric Potential &amp; Capacitance</div>
         </div>
       </div>
 
-      <div class="task-row" id="t21" onclick="toggle('t21')">
+      <div class="task-row" id="t20" data-date="2026-05-13" onclick="toggle('t20')">
         <div class="checkbox"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <div class="subj-dot dot-teal"></div>
         <div class="task-info">
           <div class="task-date date-teal">MAY 13 – TUE EVENING</div>
+          <div class="task-title">Chemistry formula prep (post-Physics exam)</div>
+          <div class="task-sub">Nernst eq, rate law, colligative formulas — light revision only, rest early</div>
+        </div>
+      </div>
+
+      <div class="task-row" id="t21" data-date="2026-05-13" onclick="toggle('t21')">
+        <div class="checkbox"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="subj-dot dot-teal"></div>
+        <div class="task-info">
+          <div class="task-date date-teal">MAY 13 – TUE NIGHT</div>
           <div class="task-title">Chemistry final revision</div>
           <div class="task-sub">Reactions + formulas only — Nernst eq, rate law, colligative formulas</div>
         </div>
       </div>
 
-      <div class="task-row" id="t22" onclick="toggle('t22')">
+      <div class="task-row exam-day" id="t22" data-date="2026-05-14" onclick="toggle('t22')">
         <div class="checkbox"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <div class="subj-dot dot-teal"></div>
         <div class="task-info">
           <div class="task-date date-teal">MAY 14 – WED · EXAM DAY</div>
-          <div class="task-title">CHEMISTRY EXAM — 7:30 AM</div>
+          <div class="task-title">🧪 CHEMISTRY EXAM — 7:30 AM</div>
           <div class="task-sub">Solutions + Electrochemistry + Chemical Kinetics</div>
         </div>
       </div>
 
-      <div class="task-row" id="t23" onclick="toggle('t23')">
+      <div class="task-row" id="t23" data-date="2026-05-15" onclick="toggle('t23')">
         <div class="checkbox"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <div class="subj-dot dot-amber"></div>
         <div class="task-info">
@@ -601,12 +745,12 @@
         </div>
       </div>
 
-      <div class="task-row" id="t24" onclick="toggle('t24')">
+      <div class="task-row exam-day" id="t24" data-date="2026-05-18" onclick="toggle('t24')">
         <div class="checkbox"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <div class="subj-dot dot-amber"></div>
         <div class="task-info">
           <div class="task-date date-amber">MAY 18 – MON · EXAM DAY</div>
-          <div class="task-title">MATHS EXAM — 7:30 AM</div>
+          <div class="task-title">📐 MATHS EXAM — 7:30 AM</div>
           <div class="task-sub">Relations &amp; Functions + Matrices + Determinants</div>
         </div>
       </div>
@@ -618,16 +762,19 @@
   <div class="section-label">Exam schedule</div>
   <div class="exam-grid">
     <div class="exam-card phy">
+      <div class="exam-countdown-badge" id="ec-phy">— days</div>
       <div class="exam-subj">Physics</div>
       <div class="exam-date">13 May 2026 · 7:30 – 10:15 AM</div>
       <div class="exam-topics">Electric Charges &amp; Fields<br/>Electric Potential &amp; Capacitance</div>
     </div>
     <div class="exam-card chem">
+      <div class="exam-countdown-badge" id="ec-chem">— days</div>
       <div class="exam-subj">Chemistry</div>
       <div class="exam-date">14 May 2026 · 7:30 – 10:15 AM</div>
       <div class="exam-topics">Solutions<br/>Electrochemistry<br/>Chemical Kinetics</div>
     </div>
     <div class="exam-card math">
+      <div class="exam-countdown-badge" id="ec-math">— days</div>
       <div class="exam-subj">Maths</div>
       <div class="exam-date">18 May 2026 · 7:30 – 10:15 AM</div>
       <div class="exam-topics">Relations &amp; Functions<br/>Matrices<br/>Determinants</div>
@@ -663,17 +810,55 @@
 </div>
 
 <script>
-  const TASKS = ['t1','t2','t3','t4','t5','t6','t7','t8','t9','t10','t11','t12','t13','t14','t15','t16','t17','t18','t19','t20','t21','t22','t23','t24'];
+  // ─── DATA ───────────────────────────────────────────────────────────────
+  const TASKS = ['t1','t2','t3','t4','t5','t6','t7','t8','t9','t10',
+                 't11','t12','t13','t14','t15','t16','t17','t18',
+                 't19','t20','t21','t22','t23','t24'];
+
+  const PHASE_TASKS = {
+    phase1: ['t1','t2','t3','t4','t5','t6','t7','t8','t9','t10','t11','t12','t13','t14'],
+    phase2: ['t15','t16','t17','t18'],
+    phase3: ['t19','t20','t21','t22','t23','t24'],
+  };
+
+  const TASK_META = {
+    t1:  { date: '2026-04-26', title: 'Matrices — Part 1', sub: 'Types, addition, subtraction, multiplication, transpose, symmetric + 10 Qs' },
+    t2:  { date: '2026-04-27', title: 'Matrices — Part 2', sub: 'Invertible matrices, elementary row operations + 20 practice problems' },
+    t3:  { date: '2026-04-28', title: 'Solutions — Part 1', sub: 'Molarity, molality, mole fraction, normality · NCERT read + notes' },
+    t4:  { date: '2026-04-29', title: 'Solutions — Part 2', sub: 'Colligative properties: vapour pressure, boiling pt elevation, osmotic pressure + 15 Qs' },
+    t5:  { date: '2026-04-30', title: 'Relations & Functions — Part 1', sub: 'Types of relations, reflexive / symmetric / transitive, equivalence relations' },
+    t6:  { date: '2026-05-01', title: 'Relations & Functions — Part 2', sub: 'One-one, onto, bijective, composition, inverse functions + 15 Qs' },
+    t7:  { date: '2026-05-02', title: 'Electrochemistry — Part 1', sub: 'Galvanic cells, standard electrode potential, EMF, Nernst equation' },
+    t8:  { date: '2026-05-03', title: 'Electrochemistry — Part 2', sub: 'Electrolysis, Faraday laws, conductance, Kohlrausch law + 15 Qs' },
+    t9:  { date: '2026-05-04', title: 'Electric Charges & Fields — Part 1', sub: "Coulomb's law, superposition, electric field, field lines, Gauss's law" },
+    t10: { date: '2026-05-05', title: 'Electric Charges & Fields — Part 2', sub: "Applications of Gauss's law, electric dipole + 15 numericals" },
+    t11: { date: '2026-05-06', title: 'Chemical Kinetics — Part 1', sub: 'Rate of reaction, rate law, order, molecularity, integrated rate equations' },
+    t12: { date: '2026-05-07', title: 'Chemical Kinetics — Part 2', sub: 'Arrhenius equation, activation energy, half-life, temp dependence + 15 Qs' },
+    t13: { date: '2026-05-08', title: 'Electric Potential & Capacitance — Part 1', sub: 'Potential, potential energy, equipotential surfaces, relation with E field' },
+    t14: { date: '2026-05-09', title: 'Electric Potential & Capacitance — Part 2', sub: 'Capacitors, series/parallel combos, energy stored, dielectrics + 15 Qs' },
+    t15: { date: '2026-05-10', title: 'Determinants — Part 1', sub: 'Properties, expansion along rows/cols, minors, cofactors, adjoint' },
+    t16: { date: '2026-05-11', title: 'Determinants — Part 2', sub: 'Inverse via adjoint, Cramer\'s rule, solve linear equations + 20 problems' },
+    t17: { date: '2026-05-12', title: 'Full Maths mega revision', sub: 'All 3 chapters mixed — 30 questions timed, formula sheet review' },
+    t18: { date: '2026-05-12', title: 'Physics formula card only', sub: 'No new topics. Formula sheet + sleep by 10:30 PM' },
+    t19: { date: '2026-05-13', title: '⚡ PHYSICS EXAM — 7:30 AM', sub: 'Electric Charges & Fields + Electric Potential & Capacitance' },
+    t20: { date: '2026-05-13', title: 'Chemistry formula prep (post-Physics exam)', sub: 'Nernst eq, rate law, colligative formulas — light revision only, rest early' },
+    t21: { date: '2026-05-13', title: 'Chemistry final revision', sub: 'Reactions + formulas only — Nernst eq, rate law, colligative formulas' },
+    t22: { date: '2026-05-14', title: '🧪 CHEMISTRY EXAM — 7:30 AM', sub: 'Solutions + Electrochemistry + Chemical Kinetics' },
+    t23: { date: '2026-05-15', title: 'Maths — 20 problems/day', sub: 'Mixed: Relations & Functions, Matrices, Determinants · focus on shortcuts' },
+    t24: { date: '2026-05-18', title: '📐 MATHS EXAM — 7:30 AM', sub: 'Relations & Functions + Matrices + Determinants' },
+  };
+
   const LS_KEY = 'totqa_s2_progress';
 
+  // ─── STATE ──────────────────────────────────────────────────────────────
   function loadState() {
     try { return JSON.parse(localStorage.getItem(LS_KEY)) || {}; } catch { return {}; }
   }
-
   function saveState(state) {
     localStorage.setItem(LS_KEY, JSON.stringify(state));
   }
 
+  // ─── TOGGLE ─────────────────────────────────────────────────────────────
   function toggle(id) {
     const state = loadState();
     state[id] = !state[id];
@@ -681,30 +866,146 @@
     applyState(state);
   }
 
+  // ─── TODAY ──────────────────────────────────────────────────────────────
+  function todayStr() {
+    const d = new Date();
+    const y = d.getFullYear();
+    const m = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    return `${y}-${m}-${day}`;
+  }
+
+  function daysUntil(dateStr) {
+    const now = new Date();
+    now.setHours(0,0,0,0);
+    const target = new Date(dateStr);
+    target.setHours(0,0,0,0);
+    return Math.ceil((target - now) / 86400000);
+  }
+
+  // ─── STREAK ─────────────────────────────────────────────────────────────
+  function calcStreak(state) {
+    const today = new Date(); today.setHours(0,0,0,0);
+    let streak = 0;
+    // Walk backwards from today, check if any task on that date is done
+    for (let i = 0; i < 30; i++) {
+      const d = new Date(today); d.setDate(d.getDate() - i);
+      const ds = d.toISOString().slice(0, 10);
+      const tasksOnDay = TASKS.filter(id => TASK_META[id] && TASK_META[id].date === ds);
+      if (tasksOnDay.length === 0) { if (i === 0) continue; break; }
+      const anyDone = tasksOnDay.some(id => state[id]);
+      if (anyDone) streak++;
+      else if (i > 0) break; // gap in streak
+    }
+    return streak;
+  }
+
+  // ─── APPLY STATE ────────────────────────────────────────────────────────
   function applyState(state) {
+    const today = todayStr();
     let done = 0;
+    let todayTask = null;
+
     TASKS.forEach(id => {
       const row = document.getElementById(id);
       if (!row) return;
+
+      // done styling
       if (state[id]) { row.classList.add('done'); done++; }
       else row.classList.remove('done');
+
+      // today highlight
+      const meta = TASK_META[id];
+      if (meta && meta.date === today) {
+        row.classList.add('is-today');
+        // inject today tag if not already there
+        const titleEl = row.querySelector('.task-title');
+        if (titleEl && !titleEl.querySelector('.today-tag')) {
+          const tag = document.createElement('span');
+          tag.className = 'today-tag';
+          tag.textContent = 'TODAY';
+          titleEl.appendChild(tag);
+        }
+        if (!todayTask) todayTask = meta;
+      } else {
+        row.classList.remove('is-today');
+      }
     });
+
+    // progress bar
     const pct = Math.round((done / TASKS.length) * 100);
     document.getElementById('prog-fill').style.width = pct + '%';
     document.getElementById('prog-text').textContent = done + ' / ' + TASKS.length + ' done';
+
+    // phase mini-progress
+    Object.entries(PHASE_TASKS).forEach(([phase, ids], i) => {
+      const pDone = ids.filter(id => state[id]).length;
+      const el = document.getElementById('pp' + (i + 1));
+      if (el) el.textContent = pDone + '/' + ids.length;
+    });
+
+    // today banner
+    if (todayTask) {
+      document.getElementById('today-title').textContent = todayTask.title;
+      document.getElementById('today-sub').textContent = todayTask.sub;
+    } else if (today > '2026-05-18') {
+      document.getElementById('today-title').textContent = 'All exams done!';
+      document.getElementById('today-sub').textContent = 'Season 2 complete. 🎉';
+    } else if (today < '2026-04-26') {
+      document.getElementById('today-title').textContent = 'Plan starts Apr 26';
+      document.getElementById('today-sub').textContent = 'Come back on Apr 26 to begin!';
+    } else {
+      document.getElementById('today-title').textContent = 'No task scheduled today';
+      document.getElementById('today-sub').textContent = 'Rest day or free revision — keep the streak!';
+    }
+
+    // streak
+    const streak = calcStreak(state);
+    const streakEl = document.getElementById('streak-display');
+    if (streak > 0) streakEl.textContent = streak + ' 🔥';
+    else streakEl.textContent = '—';
   }
 
+  // ─── PHASE TOGGLE ───────────────────────────────────────────────────────
   function togglePhase(id) {
     document.getElementById(id).classList.toggle('collapsed');
   }
 
+  // ─── RESET ──────────────────────────────────────────────────────────────
   function resetAll() {
     if (!confirm('Reset all progress? This cannot be undone.')) return;
     saveState({});
     applyState({});
   }
 
+  // ─── COUNTDOWNS ─────────────────────────────────────────────────────────
+  function updateCountdowns() {
+    const phyDays = daysUntil('2026-05-13');
+    const chemDays = daysUntil('2026-05-14');
+    const mathDays = daysUntil('2026-05-18');
+
+    const fmt = (d) => d <= 0 ? 'TODAY' : d + 'd';
+
+    document.getElementById('cd-phy').textContent = fmt(phyDays);
+    document.getElementById('cd-chem').textContent = fmt(chemDays);
+    document.getElementById('cd-math').textContent = fmt(mathDays);
+
+    document.getElementById('ec-phy').textContent = phyDays <= 0 ? 'TODAY' : phyDays + ' days';
+    document.getElementById('ec-chem').textContent = chemDays <= 0 ? 'TODAY' : chemDays + ' days';
+    document.getElementById('ec-math').textContent = mathDays <= 0 ? 'TODAY' : mathDays + ' days';
+  }
+
+  // ─── INIT ────────────────────────────────────────────────────────────────
+  updateCountdowns();
   applyState(loadState());
+
+  // Auto-scroll to today's task
+  setTimeout(() => {
+    const todayRow = document.querySelector('.task-row.is-today');
+    if (todayRow) {
+      todayRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }, 600);
 </script>
 </body>
 </html>
