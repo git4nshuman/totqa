@@ -1,1011 +1,956 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>TOTQA (SEASON - 2)</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JEE 30-Day Destruction Plan</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   :root {
     --bg: #0a0a0f;
-    --bg2: #111118;
-    --bg3: #18181f;
+    --bg2: #0f0f1a;
+    --bg3: #13131f;
+    --surface: #1a1a2e;
+    --surface2: #1f1f35;
     --border: rgba(255,255,255,0.07);
     --border2: rgba(255,255,255,0.12);
-    --text: #f0ede8;
-    --muted: #6b6875;
-    --muted2: #9b97a8;
-    --teal: #1D9E75;
-    --teal-l: #5DCAA5;
-    --teal-dim: rgba(29,158,117,0.12);
-    --amber: #EF9F27;
-    --amber-l: #FAC775;
-    --amber-dim: rgba(239,159,39,0.12);
-    --blue: #378ADD;
-    --blue-l: #85B7EB;
-    --blue-dim: rgba(55,138,221,0.12);
-    --purple: #7F77DD;
-    --purple-l: #AFA9EC;
-    --purple-dim: rgba(127,119,221,0.12);
-    --green: #639922;
-    --green-l: #97C459;
-    --green-dim: rgba(99,153,34,0.12);
-    --red: #E24B4A;
-    --red-l: #F09595;
-    --red-dim: rgba(226,75,74,0.12);
-    --check-on: #1D9E75;
+    --text: #e8e8f0;
+    --text2: #9090a8;
+    --text3: #5a5a78;
+    --math: #4facfe;
+    --math-bg: rgba(79,172,254,0.08);
+    --math-border: rgba(79,172,254,0.25);
+    --physics: #43e97b;
+    --physics-bg: rgba(67,233,123,0.08);
+    --physics-border: rgba(67,233,123,0.25);
+    --chem: #f7971e;
+    --chem-bg: rgba(247,151,30,0.08);
+    --chem-border: rgba(247,151,30,0.25);
+    --test: #f953c6;
+    --test-bg: rgba(249,83,198,0.08);
+    --test-border: rgba(249,83,198,0.25);
+    --rev: #a78bfa;
+    --rev-bg: rgba(167,139,250,0.08);
+    --rev-border: rgba(167,139,250,0.25);
+    --done: rgba(67,233,123,0.15);
+    --glow: 0 0 40px rgba(79,172,254,0.15);
   }
 
-  html { scroll-behavior: smooth; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
+    font-family: 'Syne', sans-serif;
     background: var(--bg);
     color: var(--text);
-    font-family: 'Outfit', sans-serif;
-    font-weight: 400;
     min-height: 100vh;
     overflow-x: hidden;
   }
 
-  .noise {
-    position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0.025;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    background-size: 200px;
-  }
-
-  .grid-bg {
-    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  /* Animated bg */
+  .bg-grid {
+    position: fixed; inset: 0; z-index: 0;
     background-image:
-      linear-gradient(var(--border) 1px, transparent 1px),
-      linear-gradient(90deg, var(--border) 1px, transparent 1px);
-    background-size: 48px 48px;
-    mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 30%, transparent 100%);
+      linear-gradient(rgba(79,172,254,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(79,172,254,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
   }
 
-  .glow-top {
-    position: fixed; top: -200px; left: 50%; transform: translateX(-50%);
-    width: 600px; height: 400px; border-radius: 50%;
-    background: radial-gradient(ellipse, rgba(127,119,221,0.15) 0%, transparent 70%);
-    z-index: 0; pointer-events: none;
+  .bg-orb {
+    position: fixed; border-radius: 50%; filter: blur(100px);
+    pointer-events: none; z-index: 0; opacity: 0.4;
+    animation: orbFloat 12s ease-in-out infinite;
+  }
+  .orb1 { width: 400px; height: 400px; background: rgba(79,172,254,0.12); top: -100px; right: -100px; animation-delay: 0s; }
+  .orb2 { width: 300px; height: 300px; background: rgba(167,139,250,0.1); bottom: 20%; left: -80px; animation-delay: -6s; }
+
+  @keyframes orbFloat {
+    0%,100% { transform: translateY(0px) scale(1); }
+    50% { transform: translateY(-30px) scale(1.05); }
   }
 
-  .wrapper { position: relative; z-index: 1; max-width: 860px; margin: 0 auto; padding: 0 24px 80px; }
+  .container { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 0 24px 80px; }
 
-  /* HEADER */
-  header { padding: 64px 0 40px; text-align: center; }
-  .season-tag {
-    display: inline-block;
-    font-family: 'DM Mono', monospace;
-    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
-    color: var(--purple-l);
-    border: 1px solid rgba(127,119,221,0.3);
-    padding: 5px 14px; border-radius: 20px;
-    margin-bottom: 20px;
-    animation: fadeUp 0.6s ease both;
+  /* Header */
+  header {
+    padding: 48px 0 40px;
+    display: flex; align-items: flex-start; justify-content: space-between;
+    flex-wrap: wrap; gap: 20px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 40px;
+    animation: fadeDown 0.6s ease both;
   }
 
-  h1 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(72px, 14vw, 130px);
-    line-height: 0.9;
-    letter-spacing: 4px;
-    color: var(--text);
-    animation: fadeUp 0.6s 0.1s ease both;
+  .header-left h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 800;
+    letter-spacing: -1px;
+    line-height: 1;
+    background: linear-gradient(135deg, #fff 30%, var(--math) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
-  h1 span { color: var(--purple); }
 
-  .fullform {
-    font-family: 'DM Mono', monospace;
-    font-size: 13px;
-    color: var(--muted);
-    margin-top: 14px;
-    letter-spacing: 1px;
-    animation: fadeUp 0.6s 0.2s ease both;
+  .header-left p {
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    color: var(--text3);
+    margin-top: 8px;
+    letter-spacing: 0.5px;
   }
-  .fullform em { color: var(--muted2); font-style: normal; }
 
-  .meta-strip {
-    display: flex; justify-content: center; gap: 24px; flex-wrap: wrap;
-    margin-top: 28px;
-    animation: fadeUp 0.6s 0.3s ease both;
-  }
-  .meta-pill {
-    font-family: 'DM Mono', monospace; font-size: 11px;
-    padding: 6px 14px; border-radius: 20px; border: 1px solid var(--border2);
-    background: var(--bg2);
-    color: var(--muted2);
-  }
-  .meta-pill.teal { color: var(--teal-l); border-color: rgba(29,158,117,0.3); background: var(--teal-dim); }
-  .meta-pill.amber { color: var(--amber-l); border-color: rgba(239,159,39,0.3); background: var(--amber-dim); }
-  .meta-pill.blue { color: var(--blue-l); border-color: rgba(55,138,221,0.3); background: var(--blue-dim); }
+  .header-stats { display: flex; gap: 20px; flex-wrap: wrap; }
 
-  /* COUNTDOWN STRIP */
-  .countdown-strip {
-    display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;
-    margin-top: 20px;
-    animation: fadeUp 0.6s 0.35s ease both;
-  }
-  .cd-card {
-    border-radius: 12px; padding: 12px 18px;
+  .stat-pill {
+    background: var(--surface);
     border: 1px solid var(--border);
-    background: var(--bg2);
-    text-align: center; min-width: 110px;
-  }
-  .cd-card.phy { border-color: rgba(55,138,221,0.3); background: var(--blue-dim); }
-  .cd-card.chem { border-color: rgba(29,158,117,0.3); background: var(--teal-dim); }
-  .cd-card.math { border-color: rgba(239,159,39,0.3); background: var(--amber-dim); }
-  .cd-days {
-    font-family: 'Bebas Neue', sans-serif; font-size: 32px; line-height: 1;
-  }
-  .cd-card.phy .cd-days { color: var(--blue-l); }
-  .cd-card.chem .cd-days { color: var(--teal-l); }
-  .cd-card.math .cd-days { color: var(--amber-l); }
-  .cd-label { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted2); margin-top: 4px; letter-spacing: 1px; text-transform: uppercase; }
-
-  /* TODAY BANNER */
-  .today-banner {
-    margin: 24px 0 0;
     border-radius: 12px;
-    border: 1px solid rgba(127,119,221,0.35);
-    background: var(--purple-dim);
-    padding: 14px 20px;
-    display: flex; align-items: center; gap: 14px;
-    animation: fadeUp 0.6s 0.4s ease both;
+    padding: 12px 20px;
+    text-align: center;
+    min-width: 80px;
+    transition: transform 0.2s, border-color 0.2s;
   }
-  .today-dot {
-    width: 8px; height: 8px; border-radius: 50%;
-    background: var(--purple-l);
-    flex-shrink: 0;
-    box-shadow: 0 0 8px rgba(127,119,221,0.6);
-    animation: pulse 2s infinite;
+  .stat-pill:hover { transform: translateY(-2px); border-color: var(--border2); }
+  .stat-pill .num {
+    font-size: 22px; font-weight: 800;
+    background: linear-gradient(135deg, var(--math), var(--rev));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.4; }
-  }
-  .today-text { flex: 1; }
-  .today-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--purple-l); text-transform: uppercase; margin-bottom: 3px; }
-  .today-title { font-size: 14px; font-weight: 600; }
-  .today-sub { font-size: 12px; color: var(--muted2); margin-top: 2px; }
-  .today-streak { font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: var(--purple-l); flex-shrink: 0; }
+  .stat-pill .lbl { font-size: 11px; color: var(--text3); margin-top: 2px; font-family: 'Space Mono', monospace; }
 
-  /* PROGRESS BAR */
-  .progress-wrap { margin: 28px 0 16px; animation: fadeUp 0.6s 0.4s ease both; }
-  .progress-label {
-    display: flex; justify-content: space-between;
-    font-family: 'DM Mono', monospace; font-size: 11px;
-    color: var(--muted); margin-bottom: 8px;
+  /* Progress bar */
+  .progress-bar-wrap {
+    margin-bottom: 36px;
+    animation: fadeUp 0.5s 0.2s ease both;
   }
-  .progress-label span { color: var(--purple-l); }
+  .progress-bar-label {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 8px;
+    font-family: 'Space Mono', monospace; font-size: 11px; color: var(--text3);
+  }
+  .progress-bar-label span { color: var(--math); font-weight: 700; }
   .progress-track {
-    height: 4px; background: var(--bg3); border-radius: 2px; overflow: hidden;
-    border: 1px solid var(--border);
+    height: 6px; background: var(--surface2); border-radius: 99px; overflow: hidden;
   }
   .progress-fill {
-    height: 100%; background: linear-gradient(90deg, var(--purple), var(--teal));
-    border-radius: 2px;
-    transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
+    height: 100%; border-radius: 99px;
+    background: linear-gradient(90deg, var(--math), var(--rev));
+    transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 12px rgba(79,172,254,0.5);
+    width: 0%;
   }
 
-  /* SECTION LABEL */
-  .section-label {
-    font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 3px;
-    text-transform: uppercase; color: var(--muted);
-    margin: 48px 0 16px;
-    display: flex; align-items: center; gap: 12px;
+  /* Week tabs */
+  .week-tabs {
+    display: flex; gap: 8px; flex-wrap: wrap;
+    margin-bottom: 32px;
+    animation: fadeUp 0.5s 0.3s ease both;
   }
-  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
 
-  /* PHASE BLOCK */
-  .phase-block {
+  .week-tab {
+    padding: 8px 22px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text2);
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.5px;
+  }
+  .week-tab:hover { border-color: var(--border2); color: var(--text); background: var(--surface); }
+  .week-tab.active {
+    background: var(--math);
+    border-color: var(--math);
+    color: #0a0a0f;
+    font-weight: 700;
+    box-shadow: 0 0 20px rgba(79,172,254,0.3);
+  }
+
+  /* Days grid */
+  .days-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 16px;
+  }
+
+  /* Day card */
+  .day-card {
+    background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 16px;
-    background: var(--bg2);
-    margin-bottom: 16px;
     overflow: hidden;
-    animation: fadeUp 0.5s ease both;
+    transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+    animation: cardIn 0.4s ease both;
   }
-  .phase-header {
-    display: flex; align-items: center; gap: 14px;
+  .day-card:hover { transform: translateY(-3px); border-color: var(--border2); box-shadow: var(--glow); }
+  .day-card.completed { border-color: rgba(67,233,123,0.3); background: linear-gradient(135deg, var(--surface), rgba(67,233,123,0.04)); }
+
+  .day-card-header {
     padding: 16px 20px;
-    border-bottom: 1px solid var(--border);
     cursor: pointer;
-    user-select: none;
-  }
-  .phase-header:hover { background: rgba(255,255,255,0.02); }
-  .phase-block.collapsed .phase-header { border-bottom-color: transparent; }
-  .phase-badge {
-    font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 1px;
-    padding: 4px 12px; border-radius: 8px;
-    flex-shrink: 0;
-  }
-  .ph-purple { background: var(--purple-dim); color: var(--purple-l); border: 1px solid rgba(127,119,221,0.2); }
-  .ph-amber { background: var(--amber-dim); color: var(--amber-l); border: 1px solid rgba(239,159,39,0.2); }
-  .ph-red { background: var(--red-dim); color: var(--red-l); border: 1px solid rgba(226,75,74,0.2); }
-
-  .phase-title-text { flex: 1; }
-  .phase-title-text strong { font-size: 15px; font-weight: 600; display: block; }
-  .phase-title-text small { font-size: 12px; color: var(--muted2); font-family: 'DM Mono', monospace; }
-
-  .phase-progress-mini {
-    font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted);
-    flex-shrink: 0;
-  }
-
-  .phase-chevron {
-    color: var(--muted); font-size: 12px;
-    transition: transform 0.25s;
-    font-family: 'DM Mono', monospace;
-    flex-shrink: 0;
-  }
-  .phase-block.collapsed .phase-chevron { transform: rotate(-90deg); }
-  .phase-body { padding: 8px 0; }
-  .phase-block.collapsed .phase-body { display: none; }
-
-  /* TASK ROW */
-  .task-row {
-    display: flex; align-items: flex-start; gap: 14px;
-    padding: 11px 20px;
-    border-bottom: 1px solid var(--border);
-    transition: background 0.15s;
-    cursor: pointer;
+    display: flex; align-items: center; gap: 12px;
     position: relative;
-  }
-  .task-row:last-child { border-bottom: none; }
-  .task-row:hover { background: rgba(255,255,255,0.025); }
-  .task-row.done { opacity: 0.45; }
-  .task-row.done .task-title { text-decoration: line-through; }
-
-  /* TODAY highlight */
-  .task-row.is-today {
-    background: rgba(127,119,221,0.06);
-    border-left: 2px solid var(--purple);
-    padding-left: 18px;
-  }
-  .task-row.is-today:hover { background: rgba(127,119,221,0.10); }
-  .today-tag {
-    font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 1.5px;
-    text-transform: uppercase; color: var(--purple-l);
-    background: var(--purple-dim); border: 1px solid rgba(127,119,221,0.3);
-    padding: 2px 7px; border-radius: 10px;
-    display: inline-block; margin-left: 8px; vertical-align: middle;
+    border-bottom: 1px solid var(--border);
   }
 
-  /* EXAM DAY highlight */
-  .task-row.exam-day {
-    background: rgba(226,75,74,0.05);
-    border-left: 2px solid var(--red);
-    padding-left: 18px;
-  }
-  .task-row.exam-day:hover { background: rgba(226,75,74,0.09); }
-
-  .checkbox {
-    width: 20px; height: 20px; border-radius: 6px;
-    border: 1.5px solid var(--border2);
-    flex-shrink: 0; margin-top: 2px;
+  .day-circle {
+    width: 42px; height: 42px; border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
-    transition: all 0.2s;
-    background: var(--bg3);
+    font-family: 'Space Mono', monospace; font-size: 13px; font-weight: 700;
+    flex-shrink: 0;
+    transition: transform 0.3s;
   }
-  .task-row.done .checkbox {
-    background: var(--check-on);
-    border-color: var(--check-on);
-  }
-  .checkbox svg { display: none; }
-  .task-row.done .checkbox svg { display: block; }
+  .day-card:hover .day-circle { transform: scale(1.1) rotate(-5deg); }
 
-  .task-info { flex: 1; min-width: 0; }
-  .task-date {
-    font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 1px;
-    margin-bottom: 3px;
-  }
-  .task-title { font-size: 14px; font-weight: 500; line-height: 1.3; }
-  .task-sub { font-size: 12px; color: var(--muted2); margin-top: 3px; line-height: 1.4; }
+  .day-info { flex: 1; min-width: 0; }
+  .day-num-label { font-size: 10px; color: var(--text3); font-family: 'Space Mono', monospace; letter-spacing: 0.5px; text-transform: uppercase; }
+  .day-title-text { font-size: 14px; font-weight: 700; color: var(--text); margin-top: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-  .subj-dot {
-    width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 8px;
-  }
-  .dot-teal { background: var(--teal); }
-  .dot-amber { background: var(--amber); }
-  .dot-blue { background: var(--blue); }
-  .dot-green { background: var(--green-l); }
-  .dot-purple { background: var(--purple); }
-  .dot-red { background: var(--red); }
+  .day-header-right { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+  .day-progress-ring { width: 30px; height: 30px; flex-shrink: 0; }
+  .ring-bg { fill: none; stroke: var(--border2); stroke-width: 3; }
+  .ring-fill { fill: none; stroke-width: 3; stroke-linecap: round; transition: stroke-dashoffset 0.6s cubic-bezier(0.4,0,0.2,1); transform: rotate(-90deg); transform-origin: center; }
+  .ring-text { font-size: 8px; font-family: 'Space Mono', monospace; text-anchor: middle; dominant-baseline: central; }
 
-  .date-teal { color: var(--teal-l); }
-  .date-amber { color: var(--amber-l); }
-  .date-blue { color: var(--blue-l); }
-  .date-green { color: var(--green-l); }
-  .date-purple { color: var(--purple-l); }
-  .date-red { color: var(--red-l); }
+  .chevron-icon { width: 16px; height: 16px; color: var(--text3); transition: transform 0.3s; flex-shrink: 0; }
+  .day-card.open .chevron-icon { transform: rotate(180deg); }
 
-  /* EXAM CARDS */
-  .exam-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-top: 12px; }
-  .exam-card {
-    border-radius: 12px; padding: 18px 20px;
-    border: 1px solid var(--border);
-    background: var(--bg2);
-    position: relative; overflow: hidden;
+  /* Task list */
+  .task-list {
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.45s cubic-bezier(0.4,0,0.2,1);
   }
-  .exam-card::before {
-    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
-  }
-  .exam-card.phy { border-color: rgba(55,138,221,0.35); background: var(--blue-dim); }
-  .exam-card.phy::before { background: var(--blue); }
-  .exam-card.chem { border-color: rgba(29,158,117,0.35); background: var(--teal-dim); }
-  .exam-card.chem::before { background: var(--teal); }
-  .exam-card.math { border-color: rgba(239,159,39,0.35); background: var(--amber-dim); }
-  .exam-card.math::before { background: var(--amber); }
-  .exam-subj { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 1px; margin-bottom: 4px; }
-  .exam-card.phy .exam-subj { color: var(--blue-l); }
-  .exam-card.chem .exam-subj { color: var(--teal-l); }
-  .exam-card.math .exam-subj { color: var(--amber-l); }
-  .exam-date { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--muted2); }
-  .exam-topics { font-size: 12px; color: var(--muted2); margin-top: 8px; line-height: 1.5; }
-  .exam-countdown-badge {
-    position: absolute; top: 14px; right: 14px;
-    font-family: 'Bebas Neue', sans-serif; font-size: 13px;
-    padding: 3px 8px; border-radius: 8px;
-  }
-  .exam-card.phy .exam-countdown-badge { background: rgba(55,138,221,0.2); color: var(--blue-l); }
-  .exam-card.chem .exam-countdown-badge { background: rgba(29,158,117,0.2); color: var(--teal-l); }
-  .exam-card.math .exam-countdown-badge { background: rgba(239,159,39,0.2); color: var(--amber-l); }
+  .day-card.open .task-list { max-height: 2000px; }
 
-  /* DAILY ROUTINE */
-  .routine-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 12px; }
-  .routine-slot {
-    border-radius: 12px; padding: 16px;
-    border: 1px solid var(--border); background: var(--bg2);
-    text-align: center;
-  }
-  .slot-time { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 1px; }
-  .slot-name { font-size: 12px; color: var(--muted2); margin-top: 4px; }
-  .slot-dur { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted); margin-top: 4px; }
-  .s1 .slot-time { color: var(--purple-l); }
-  .s2 .slot-time { color: var(--teal-l); }
-  .s3 .slot-time { color: var(--amber-l); }
-
-  /* STREAK */
-  .streak-bar {
-    display: flex; align-items: center; justify-content: center; gap: 10px;
-    margin: 24px 0 0;
-    font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted);
-    animation: fadeUp 0.6s 0.45s ease both;
-  }
-  .streak-fire { font-size: 20px; }
-  .streak-count { font-size: 13px; color: var(--amber-l); }
-
-  /* RESET */
-  .reset-btn {
-    display: block; margin: 40px auto 0;
-    font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 2px;
-    text-transform: uppercase; color: var(--muted);
-    background: none; border: 1px solid var(--border);
-    padding: 10px 24px; border-radius: 20px; cursor: pointer;
-    transition: all 0.2s;
-  }
-  .reset-btn:hover { color: var(--red); border-color: rgba(226,75,74,0.4); }
-
-  /* FOOTER */
-  footer {
-    text-align: center; margin-top: 60px;
-    font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted);
+  .task-section-label {
+    padding: 10px 20px 4px;
+    font-size: 10px;
+    font-family: 'Space Mono', monospace;
+    color: var(--text3);
     letter-spacing: 1px;
+    text-transform: uppercase;
   }
-  footer span { color: var(--purple-l); }
 
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(16px); }
-    to { opacity: 1; transform: translateY(0); }
+  .task-item {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background 0.15s;
+    position: relative;
+    border-radius: 8px;
+    margin: 2px 8px;
   }
+  .task-item:hover { background: rgba(255,255,255,0.03); }
+  .task-item.done { opacity: 0.55; }
+
+  .task-check {
+    width: 18px; height: 18px;
+    border-radius: 5px;
+    border: 1.5px solid var(--border2);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+    transition: all 0.2s;
+    background: transparent;
+  }
+  .task-item:hover .task-check { border-color: var(--text2); }
+  .task-item.done .task-check {
+    background: var(--physics);
+    border-color: var(--physics);
+  }
+
+  .check-svg { width: 10px; height: 10px; display: none; }
+  .task-item.done .check-svg { display: block; }
+
+  .task-text-wrap { flex: 1; min-width: 0; }
+  .task-text {
+    font-size: 13px; color: var(--text); line-height: 1.5;
+    transition: color 0.2s;
+  }
+  .task-item.done .task-text { text-decoration: line-through; color: var(--text3); }
+  .task-sub {
+    font-size: 11px; color: var(--text3);
+    font-family: 'Space Mono', monospace;
+    margin-top: 2px;
+    line-height: 1.4;
+  }
+
+  .task-done-flash {
+    position: absolute; inset: 0; background: rgba(67,233,123,0.08);
+    border-radius: 8px; pointer-events: none;
+    animation: flashGreen 0.4s ease forwards;
+  }
+  @keyframes flashGreen {
+    0% { opacity: 1; } 100% { opacity: 0; }
+  }
+
+  /* Subject badge */
+  .subject-badge {
+    font-size: 10px; font-family: 'Space Mono', monospace;
+    padding: 3px 8px; border-radius: 5px; font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+  .badge-math { background: var(--math-bg); color: var(--math); border: 1px solid var(--math-border); }
+  .badge-physics { background: var(--physics-bg); color: var(--physics); border: 1px solid var(--physics-border); }
+  .badge-chem { background: var(--chem-bg); color: var(--chem); border: 1px solid var(--chem-border); }
+  .badge-test { background: var(--test-bg); color: var(--test); border: 1px solid var(--test-border); }
+  .badge-rev { background: var(--rev-bg); color: var(--rev); border: 1px solid var(--rev-border); }
+
+  /* Colors per subject */
+  .day-math .day-circle { background: var(--math-bg); color: var(--math); border: 1px solid var(--math-border); }
+  .day-physics .day-circle { background: var(--physics-bg); color: var(--physics); border: 1px solid var(--physics-border); }
+  .day-chem .day-circle { background: var(--chem-bg); color: var(--chem); border: 1px solid var(--chem-border); }
+  .day-test .day-circle { background: var(--test-bg); color: var(--test); border: 1px solid var(--test-border); }
+  .day-rev .day-circle { background: var(--rev-bg); color: var(--rev); border: 1px solid var(--rev-border); }
+  .day-math .ring-fill { stroke: var(--math); }
+  .day-physics .ring-fill { stroke: var(--physics); }
+  .day-chem .ring-fill { stroke: var(--chem); }
+  .day-test .ring-fill { stroke: var(--test); }
+  .day-rev .ring-fill { stroke: var(--rev); }
+  .day-math .ring-text { fill: var(--math); }
+  .day-physics .ring-text { fill: var(--physics); }
+  .day-chem .ring-text { fill: var(--chem); }
+  .day-test .ring-text { fill: var(--test); }
+  .day-rev .ring-text { fill: var(--rev); }
+
+  /* Confetti */
+  .confetti-piece {
+    position: fixed; width: 8px; height: 8px; border-radius: 2px;
+    pointer-events: none; z-index: 9999;
+    animation: confettiFall 1s ease forwards;
+  }
+  @keyframes confettiFall {
+    0% { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(200px) rotate(720deg); opacity: 0; }
+  }
+
+  /* Animations */
+  @keyframes fadeDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes cardIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* Streak banner */
+  .streak-banner {
+    display: flex; align-items: center; gap: 12px;
+    background: linear-gradient(135deg, rgba(247,151,30,0.1), rgba(249,83,198,0.08));
+    border: 1px solid rgba(247,151,30,0.2);
+    border-radius: 12px;
+    padding: 12px 20px;
+    margin-bottom: 28px;
+    animation: fadeUp 0.5s 0.15s ease both;
+  }
+  .streak-icon { font-size: 20px; }
+  .streak-text { font-size: 13px; color: var(--text2); }
+  .streak-text strong { color: var(--chem); font-weight: 700; }
+
+  /* Day card footer */
+  .day-footer {
+    padding: 10px 20px 14px;
+    display: flex; justify-content: space-between; align-items: center;
+    border-top: 1px solid var(--border);
+    margin-top: 4px;
+  }
+  .day-footer-text { font-size: 11px; color: var(--text3); font-family: 'Space Mono', monospace; }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--surface2); border-radius: 99px; }
+
+  /* Hidden week */
+  .week-section { display: none; }
+  .week-section.active { display: block; }
+
+  /* Toast */
+  .toast {
+    position: fixed; bottom: 32px; right: 32px; z-index: 9998;
+    background: var(--surface2);
+    border: 1px solid var(--border2);
+    border-radius: 12px;
+    padding: 12px 20px;
+    font-size: 13px; color: var(--text);
+    transform: translateY(100px); opacity: 0;
+    transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+    pointer-events: none;
+    max-width: 280px;
+  }
+  .toast.show { transform: translateY(0); opacity: 1; }
 
   @media (max-width: 600px) {
-    .routine-grid { grid-template-columns: 1fr; }
-    .exam-grid { grid-template-columns: 1fr; }
-    h1 { font-size: 72px; }
-    .countdown-strip { gap: 8px; }
-    .cd-card { min-width: 90px; padding: 10px 12px; }
+    .days-grid { grid-template-columns: 1fr; }
+    header { padding: 32px 0 28px; }
+    .header-stats { gap: 10px; }
+    .stat-pill { padding: 10px 14px; min-width: 60px; }
   }
 </style>
 </head>
 <body>
-<div class="noise"></div>
-<div class="grid-bg"></div>
-<div class="glow-top"></div>
 
-<div class="wrapper">
+<div class="bg-grid"></div>
+<div class="bg-orb orb1"></div>
+<div class="bg-orb orb2"></div>
 
+<div class="container">
   <header>
-    <div class="season-tag">Class XII · PA I · Session 2026-27</div>
-    <h1>TOTQA<br/><span>(SEASON - 2)</span></h1>
-    <p class="fullform"><em>Treaty Of Tanishq's Ass</em></p>
-    <div class="meta-strip">
-      <span class="meta-pill teal">Chem → 14 May</span>
-      <span class="meta-pill blue">Physics → 13 May</span>
-      <span class="meta-pill amber">Maths → 18 May</span>
-      <span class="meta-pill">22 days · 3–4 hrs/day</span>
+    <div class="header-left">
+      <h1>JEE DESTRUCTION<br>PLAN</h1>
+      <p>// 30 DAYS · 6–7 HRS/DAY · MATHS + PHYSICS + INORGANIC</p>
     </div>
-
-    <!-- COUNTDOWN -->
-    <div class="countdown-strip">
-      <div class="cd-card phy">
-        <div class="cd-days" id="cd-phy">—</div>
-        <div class="cd-label">days to Physics</div>
-      </div>
-      <div class="cd-card chem">
-        <div class="cd-days" id="cd-chem">—</div>
-        <div class="cd-label">days to Chem</div>
-      </div>
-      <div class="cd-card math">
-        <div class="cd-days" id="cd-math">—</div>
-        <div class="cd-label">days to Maths</div>
-      </div>
+    <div class="header-stats">
+      <div class="stat-pill"><div class="num" id="total-done">0</div><div class="lbl">tasks done</div></div>
+      <div class="stat-pill"><div class="num" id="total-pct">0%</div><div class="lbl">complete</div></div>
+      <div class="stat-pill"><div class="num" id="days-done">0</div><div class="lbl">days cleared</div></div>
     </div>
   </header>
 
-  <!-- TODAY BANNER -->
-  <div class="today-banner" id="today-banner">
-    <div class="today-dot"></div>
-    <div class="today-text">
-      <div class="today-label">Today's task</div>
-      <div class="today-title" id="today-title">Loading…</div>
-      <div class="today-sub" id="today-sub"></div>
+  <div class="progress-bar-wrap">
+    <div class="progress-bar-label">
+      <span>overall progress</span>
+      <span id="progress-text">0 / 0 tasks</span>
     </div>
-    <div class="today-streak" id="streak-display">🔥</div>
+    <div class="progress-track"><div class="progress-fill" id="main-progress"></div></div>
   </div>
 
-  <!-- PROGRESS BAR -->
-  <div class="progress-wrap">
-    <div class="progress-label">
-      <span>Overall progress</span>
-      <span id="prog-text">0 / 0 done</span>
-    </div>
-    <div class="progress-track">
-      <div class="progress-fill" id="prog-fill" style="width:0%"></div>
-    </div>
+  <div class="streak-banner">
+    <span class="streak-icon">⚡</span>
+    <div class="streak-text">Current streak: <strong id="streak-count">0 days</strong> &nbsp;·&nbsp; Keep going, JEE waits for no one.</div>
   </div>
 
-  <!-- ===== PHASE 1 ===== -->
-  <div class="section-label">Study phases</div>
+  <div class="week-tabs" id="week-tabs"></div>
 
-  <div class="phase-block" id="phase1">
-    <div class="phase-header" onclick="togglePhase('phase1')">
-      <div class="phase-badge ph-purple">P1</div>
-      <div class="phase-title-text">
-        <strong>Foundation — Cover everything once</strong>
-        <small>Apr 26 – May 9</small>
-      </div>
-      <div class="phase-progress-mini" id="pp1">0/14</div>
-      <div class="phase-chevron">▼</div>
-    </div>
-    <div class="phase-body">
-
-      <!-- APR 26: Matrices P1 (was wasted, now Day 1) -->
-      <div class="task-row" id="t1" data-date="2026-04-26" onclick="toggle('t1')">
-        <div class="checkbox"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="subj-dot dot-amber"></div>
-        <div class="task-info">
-          <div class="task-date date-amber">APR 26 – SAT</div>
-          <div class="task-title">Matrices — Part 1</div>
-          <div class="task-sub">Types, addition, subtraction, multiplication, transpose, symmetric + 10 Qs</div>
-        </div>
-      </div>
-
-      <div class="task-row" id="t2" data-date="2026-04-27" onclick="toggle('t2')">
-        <div class="checkbox"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="subj-dot dot-amber"></div>
-        <div class="task-info">
-          <div class="task-date date-amber">APR 27 – SUN</div>
-          <div class="task-title">Matrices — Part 2</div>
-          <div class="task-sub">Invertible matrices, elementary row operations + 20 practice problems</div>
-        </div>
-      </div>
-
-      <div class="task-row" id="t3" data-date="2026-04-28" onclick="toggle('t3')">
-        <div class="checkbox"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="subj-dot dot-teal"></div>
-        <div class="task-info">
-          <div class="task-date date-teal">APR 28 – MON</div>
-          <div class="task-title">Solutions — Part 1</div>
-          <div class="task-sub">Molarity, molality, mole fraction, normality · NCERT read + notes</div>
-        </div>
-      </div>
-
-      <div class="task-row" id="t4" data-date="2026-04-29" onclick="toggle('t4')">
-        <div class="checkbox"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="subj-dot dot-teal"></div>
-        <div class="task-info">
-          <div class="task-date date-teal">APR 29 – TUE</div>
-          <div class="task-title">Solutions — Part 2</div>
-          <div class="task-sub">Colligative properties: vapour pressure, boiling pt elevation, osmotic pressure + 15 Qs</div>
-        </div>
-      </div>
-
-      <div class="task-row" id="t5" data-date="2026-04-30" onclick="toggle('t5')">
-        <div class="checkbox"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="subj-dot dot-amber"></div>
-        <div class="task-info">
-          <div class="task-date date-amber">APR 30 – WED</div>
-          <div class="task-title">Relations &amp; Functions — Part 1</div>
-          <div class="task-sub">Types of relations, reflexive / symmetric / transitive, equivalence relations</div>
-        </div>
-      </div>
-
-      <div class="task-row" id="t6" data-date="2026-05-01" onclick="toggle('t6')">
-        <div class="checkbox"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="subj-dot dot-amber"></div>
-        <div class="task-info">
-          <div class="task-date date-amber">MAY 01 – THU</div>
-          <div class="task-title">Relations &amp; Functions — Part 2</div>
-          <div class="task-sub">One-one, onto, bijective, composition, inverse functions + 15 Qs</div>
-        </div>
-      </div>
-
-      <div class="task-row" id="t7" data-date="2026-05-02" onclick="toggle('t7')">
-        <div class="checkbox"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="subj-dot dot-teal"></div>
-        <div class="task-info">
-          <div class="task-date date-teal">MAY 02 – FRI</div>
-          <div class="task-title">Electrochemistry — Part 1</div>
-          <div class="task-sub">Galvanic cells, standard electrode potential, EMF, Nernst equation</div>
-        </div>
-      </div>
-
-      <div class="task-row" id="t8" data-date="2026-05-03" onclick="toggle('t8')">
-        <div class="checkbox"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="subj-dot dot-teal"></div>
-        <div class="task-info">
-          <div class="task-date date-teal">MAY 03 – SAT</div>
-          <div class="task-title">Electrochemistry — Part 2</div>
-          <div class="task-sub">Electrolysis, Faraday laws, conductance, Kohlrausch law + 15 Qs</div>
-        </div>
-      </div>
-
-      <div class="task-row" id="t9" data-date="2026-05-04" onclick="toggle('t9')">
-        <div class="checkbox"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="subj-dot dot-blue"></div>
-        <div class="task-info">
-          <div class="task-date date-blue">MAY 04 – SUN</div>
-          <div class="task-title">Electric Charges &amp; Fields — Part 1</div>
-          <div class="task-sub">Coulomb's law, superposition, electric field, field lines, Gauss's law</div>
-        </div>
-      </div>
-
-      <div class="task-row" id="t10" data-date="2026-05-05" onclick="toggle('t10')">
-        <div class="checkbox"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="subj-dot dot-blue"></div>
-        <div class="task-info">
-          <div class="task-date date-blue">MAY 05 – MON</div>
-          <div class="task-title">Electric Charges &amp; Fields — Part 2</div>
-          <div class="task-sub">Applications of Gauss's law, electric dipole + 15 numericals</div>
-        </div>
-      </div>
-
-      <div class="task-row" id="t11" data-date="2026-05-06" onclick="toggle('t11')">
-        <div class="checkbox"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="subj-dot dot-teal"></div>
-        <div class="task-info">
-          <div class="task-date date-teal">MAY 06 – TUE</div>
-          <div class="task-title">Chemical Kinetics — Part 1</div>
-          <div class="task-sub">Rate of reaction, rate law, order, molecularity, integrated rate equations</div>
-        </div>
-      </div>
-
-      <div class="task-row" id="t12" data-date="2026-05-07" onclick="toggle('t12')">
-        <div class="checkbox"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="subj-dot dot-teal"></div>
-        <div class="task-info">
-          <div class="task-date date-teal">MAY 07 – WED</div>
-          <div class="task-title">Chemical Kinetics — Part 2</div>
-          <div class="task-sub">Arrhenius equation, activation energy, half-life, temp dependence + 15 Qs</div>
-        </div>
-      </div>
-
-      <div class="task-row" id="t13" data-date="2026-05-08" onclick="toggle('t13')">
-        <div class="checkbox"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="subj-dot dot-blue"></div>
-        <div class="task-info">
-          <div class="task-date date-blue">MAY 08 – THU</div>
-          <div class="task-title">Electric Potential &amp; Capacitance — Part 1</div>
-          <div class="task-sub">Potential, potential energy, equipotential surfaces, relation with E field</div>
-        </div>
-      </div>
-
-      <div class="task-row" id="t14" data-date="2026-05-09" onclick="toggle('t14')">
-        <div class="checkbox"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="subj-dot dot-blue"></div>
-        <div class="task-info">
-          <div class="task-date date-blue">MAY 09 – FRI</div>
-          <div class="task-title">Electric Potential &amp; Capacitance — Part 2</div>
-          <div class="task-sub">Capacitors, series/parallel combos, energy stored, dielectrics + 15 Qs</div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- ===== PHASE 2 ===== -->
-  <div class="phase-block" id="phase2">
-    <div class="phase-header" onclick="togglePhase('phase2')">
-      <div class="phase-badge ph-amber">P2</div>
-      <div class="phase-title-text">
-        <strong>Practice sprint — Determinants + Mega revision</strong>
-        <small>May 10 – May 12</small>
-      </div>
-      <div class="phase-progress-mini" id="pp2">0/4</div>
-      <div class="phase-chevron">▼</div>
-    </div>
-    <div class="phase-body">
-
-      <div class="task-row" id="t15" data-date="2026-05-10" onclick="toggle('t15')">
-        <div class="checkbox"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="subj-dot dot-amber"></div>
-        <div class="task-info">
-          <div class="task-date date-amber">MAY 10 – SAT</div>
-          <div class="task-title">Determinants — Part 1</div>
-          <div class="task-sub">Properties, expansion along rows/cols, minors, cofactors, adjoint</div>
-        </div>
-      </div>
-
-      <div class="task-row" id="t16" data-date="2026-05-11" onclick="toggle('t16')">
-        <div class="checkbox"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="subj-dot dot-amber"></div>
-        <div class="task-info">
-          <div class="task-date date-amber">MAY 11 – SUN</div>
-          <div class="task-title">Determinants — Part 2</div>
-          <div class="task-sub">Inverse via adjoint, Cramer's rule, solve linear equations + 20 problems</div>
-        </div>
-      </div>
-
-      <div class="task-row" id="t17" data-date="2026-05-12" onclick="toggle('t17')">
-        <div class="checkbox"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="subj-dot dot-green"></div>
-        <div class="task-info">
-          <div class="task-date date-green">MAY 12 – MON</div>
-          <div class="task-title">Full Maths mega revision</div>
-          <div class="task-sub">All 3 chapters mixed — 30 questions timed, formula sheet review</div>
-        </div>
-      </div>
-
-      <div class="task-row" id="t18" data-date="2026-05-12" onclick="toggle('t18')">
-        <div class="checkbox"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="subj-dot dot-blue"></div>
-        <div class="task-info">
-          <div class="task-date date-blue">MAY 12 – MON NIGHT</div>
-          <div class="task-title">Physics formula card only</div>
-          <div class="task-sub">No new topics. Formula sheet + sleep by 10:30 PM</div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- ===== PHASE 3 ===== -->
-  <div class="phase-block" id="phase3">
-    <div class="phase-header" onclick="togglePhase('phase3')">
-      <div class="phase-badge ph-red">P3</div>
-      <div class="phase-title-text">
-        <strong>Exam week — Final polish</strong>
-        <small>May 13 – May 18</small>
-      </div>
-      <div class="phase-progress-mini" id="pp3">0/6</div>
-      <div class="phase-chevron">▼</div>
-    </div>
-    <div class="phase-body">
-
-      <div class="task-row exam-day" id="t19" data-date="2026-05-13" onclick="toggle('t19')">
-        <div class="checkbox"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="subj-dot dot-blue"></div>
-        <div class="task-info">
-          <div class="task-date date-blue">MAY 13 – TUE · EXAM DAY</div>
-          <div class="task-title">⚡ PHYSICS EXAM — 7:30 AM</div>
-          <div class="task-sub">Electric Charges &amp; Fields + Electric Potential &amp; Capacitance</div>
-        </div>
-      </div>
-
-      <div class="task-row" id="t20" data-date="2026-05-13" onclick="toggle('t20')">
-        <div class="checkbox"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="subj-dot dot-teal"></div>
-        <div class="task-info">
-          <div class="task-date date-teal">MAY 13 – TUE EVENING</div>
-          <div class="task-title">Chemistry formula prep (post-Physics exam)</div>
-          <div class="task-sub">Nernst eq, rate law, colligative formulas — light revision only, rest early</div>
-        </div>
-      </div>
-
-      <div class="task-row" id="t21" data-date="2026-05-13" onclick="toggle('t21')">
-        <div class="checkbox"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="subj-dot dot-teal"></div>
-        <div class="task-info">
-          <div class="task-date date-teal">MAY 13 – TUE NIGHT</div>
-          <div class="task-title">Chemistry final revision</div>
-          <div class="task-sub">Reactions + formulas only — Nernst eq, rate law, colligative formulas</div>
-        </div>
-      </div>
-
-      <div class="task-row exam-day" id="t22" data-date="2026-05-14" onclick="toggle('t22')">
-        <div class="checkbox"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="subj-dot dot-teal"></div>
-        <div class="task-info">
-          <div class="task-date date-teal">MAY 14 – WED · EXAM DAY</div>
-          <div class="task-title">🧪 CHEMISTRY EXAM — 7:30 AM</div>
-          <div class="task-sub">Solutions + Electrochemistry + Chemical Kinetics</div>
-        </div>
-      </div>
-
-      <div class="task-row" id="t23" data-date="2026-05-15" onclick="toggle('t23')">
-        <div class="checkbox"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="subj-dot dot-amber"></div>
-        <div class="task-info">
-          <div class="task-date date-amber">MAY 15–17 – GRIND</div>
-          <div class="task-title">Maths — 20 problems/day</div>
-          <div class="task-sub">Mixed: Relations &amp; Functions, Matrices, Determinants · focus on shortcuts</div>
-        </div>
-      </div>
-
-      <div class="task-row exam-day" id="t24" data-date="2026-05-18" onclick="toggle('t24')">
-        <div class="checkbox"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="subj-dot dot-amber"></div>
-        <div class="task-info">
-          <div class="task-date date-amber">MAY 18 – MON · EXAM DAY</div>
-          <div class="task-title">📐 MATHS EXAM — 7:30 AM</div>
-          <div class="task-sub">Relations &amp; Functions + Matrices + Determinants</div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- EXAM CARDS -->
-  <div class="section-label">Exam schedule</div>
-  <div class="exam-grid">
-    <div class="exam-card phy">
-      <div class="exam-countdown-badge" id="ec-phy">— days</div>
-      <div class="exam-subj">Physics</div>
-      <div class="exam-date">13 May 2026 · 7:30 – 10:15 AM</div>
-      <div class="exam-topics">Electric Charges &amp; Fields<br/>Electric Potential &amp; Capacitance</div>
-    </div>
-    <div class="exam-card chem">
-      <div class="exam-countdown-badge" id="ec-chem">— days</div>
-      <div class="exam-subj">Chemistry</div>
-      <div class="exam-date">14 May 2026 · 7:30 – 10:15 AM</div>
-      <div class="exam-topics">Solutions<br/>Electrochemistry<br/>Chemical Kinetics</div>
-    </div>
-    <div class="exam-card math">
-      <div class="exam-countdown-badge" id="ec-math">— days</div>
-      <div class="exam-subj">Maths</div>
-      <div class="exam-date">18 May 2026 · 7:30 – 10:15 AM</div>
-      <div class="exam-topics">Relations &amp; Functions<br/>Matrices<br/>Determinants</div>
-    </div>
-  </div>
-
-  <!-- DAILY ROUTINE -->
-  <div class="section-label">Daily routine</div>
-  <div class="routine-grid">
-    <div class="routine-slot s1">
-      <div class="slot-time">SLOT 1</div>
-      <div class="slot-name">New topic · read + notes</div>
-      <div class="slot-dur">1.5 hours</div>
-    </div>
-    <div class="routine-slot s2">
-      <div class="slot-time">SLOT 2</div>
-      <div class="slot-name">Solve questions</div>
-      <div class="slot-dur">1 hour</div>
-    </div>
-    <div class="routine-slot s3">
-      <div class="slot-time">SLOT 3</div>
-      <div class="slot-name">Revise yesterday</div>
-      <div class="slot-dur">30–45 min</div>
-    </div>
-  </div>
-
-  <button class="reset-btn" onclick="resetAll()">Reset all checkboxes</button>
-
-  <footer>
-    <p>TOTQA (SEASON - 2) · Vardhman Academy · Meerut · <span>athredox</span></p>
-  </footer>
-
+  <div id="weeks-container"></div>
 </div>
 
+<div class="toast" id="toast"></div>
+
 <script>
-  // ─── DATA ───────────────────────────────────────────────────────────────
-  const TASKS = ['t1','t2','t3','t4','t5','t6','t7','t8','t9','t10',
-                 't11','t12','t13','t14','t15','t16','t17','t18',
-                 't19','t20','t21','t22','t23','t24'];
+const PLAN = [
+  // WEEK 1
+  { day:1, subject:'math', title:'Quadratic Equations', tasks:[
+    { text:'Watch lecture: Theory of equations, discriminant, nature of roots', sub:'Allen / PW YouTube — 1.5–2 hrs' },
+    { text:'Notes: Vieta\'s formulas (sum/product of roots)', sub:'Write formulas by hand' },
+    { text:'Notes: Discriminant conditions (real, equal, imaginary roots)', sub:'' },
+    { text:'Notes: Transformation of equations', sub:'' },
+    { text:'PYQs: Quadratic equations 2020–2024', sub:'Target 15 questions' },
+    { text:'PYQs: Quadratic equations 2015–2019', sub:'Target 15 questions' },
+    { text:'Solve: Location of roots problems (5 questions)', sub:'Cengage Algebra' },
+    { text:'Error log: Write every wrong answer + reason', sub:'5–10 min ritual' },
+    { text:'Revision: Re-read all notes from today', sub:'' },
+  ]},
+  { day:2, subject:'math', title:'Complex Numbers', tasks:[
+    { text:'Watch lecture: Argand plane, modulus, argument, polar form', sub:'Allen / PW YouTube — 1.5 hrs' },
+    { text:'Watch lecture: De Moivre\'s theorem, cube roots of unity', sub:'1 hr' },
+    { text:'Notes: Euler\'s form, conjugate properties', sub:'' },
+    { text:'Notes: Geometry of complex numbers (rotation formula)', sub:'' },
+    { text:'PYQs: Complex numbers 2020–2024', sub:'15 questions' },
+    { text:'PYQs: Complex numbers 2015–2019', sub:'15 questions' },
+    { text:'Solve: 5 geometry-based complex number problems', sub:'' },
+    { text:'Error log: Document mistakes', sub:'' },
+    { text:'Revision: All complex number formulas', sub:'' },
+  ]},
+  { day:3, subject:'physics', title:'Kinematics', tasks:[
+    { text:'Watch lecture: 1D motion — displacement, velocity, acceleration', sub:'HC Verma Ch 3 concepts + PW lecture' },
+    { text:'Watch lecture: 2D motion, projectile motion', sub:'' },
+    { text:'Watch lecture: Relative motion', sub:'1 hr' },
+    { text:'Notes: All kinematic equations (both 1D and 2D)', sub:'' },
+    { text:'Notes: Projectile formulas (range, max height, time of flight)', sub:'' },
+    { text:'PYQs: Kinematics 2020–2024', sub:'15 questions' },
+    { text:'PYQs: Kinematics 2015–2019', sub:'15 questions' },
+    { text:'Solve: 5 graph-based kinematics problems', sub:'v-t and x-t graphs' },
+    { text:'Error log + revision', sub:'' },
+  ]},
+  { day:4, subject:'chem', title:'Chemical Bonding', tasks:[
+    { text:'Watch lecture: VBT — sigma, pi bonds, hybridisation', sub:'Most important Inorganic topic — 2 hrs' },
+    { text:'Watch lecture: VSEPR theory — all molecular shapes', sub:'1 hr' },
+    { text:'Watch lecture: MOT — H₂, O₂, N₂, NO, CO bond order', sub:'1 hr' },
+    { text:'Notes: All hybridisation examples (sp, sp2, sp3, sp3d, sp3d2)', sub:'' },
+    { text:'Notes: VSEPR table (linear, bent, trigonal planar, tetrahedral, etc.)', sub:'' },
+    { text:'Notes: MOT energy diagrams + bond order formula', sub:'' },
+    { text:'PYQs: Chemical Bonding 2020–2024', sub:'15 questions — MOT heavy' },
+    { text:'PYQs: Chemical Bonding 2015–2019', sub:'15 questions' },
+    { text:'Error log + revision', sub:'' },
+  ]},
+  { day:5, subject:'math', title:'Sequences & Series', tasks:[
+    { text:'Watch lecture: AP — nth term, sum of n terms', sub:'1 hr' },
+    { text:'Watch lecture: GP — nth term, sum, infinite GP', sub:'1 hr' },
+    { text:'Watch lecture: HP, AGP, special series (Σr, Σr², Σr³)', sub:'1 hr' },
+    { text:'Notes: All AP/GP/HP formulas', sub:'' },
+    { text:'Notes: AM-GM-HM inequality', sub:'' },
+    { text:'PYQs: Sequences & Series 2020–2024', sub:'15 questions' },
+    { text:'PYQs: Sequences & Series 2015–2019', sub:'15 questions' },
+    { text:'Solve: 5 AGP problems', sub:'Trickiest topic in this chapter' },
+    { text:'Error log + revision', sub:'' },
+  ]},
+  { day:6, subject:'physics', title:'Laws of Motion', tasks:[
+    { text:'Watch lecture: Newton\'s 3 laws, inertia, momentum', sub:'1.5 hrs' },
+    { text:'Watch lecture: Free Body Diagrams — all standard cases', sub:'1 hr' },
+    { text:'Watch lecture: Friction — static, kinetic, angle of friction', sub:'1 hr' },
+    { text:'Notes: FBD method (step-by-step)', sub:'' },
+    { text:'Notes: Pulley systems (Atwood machine, inclined)', sub:'' },
+    { text:'PYQs: Laws of Motion 2020–2024', sub:'15 questions' },
+    { text:'PYQs: Laws of Motion 2015–2019', sub:'15 questions' },
+    { text:'Error log + revision', sub:'' },
+  ]},
+  { day:7, subject:'test', title:'Week 1 Mini Test', tasks:[
+    { text:'Mini Test 1 — Maths (Quadratics + Complex + Sequences)', sub:'15 questions, 1.5 hrs, timed' },
+    { text:'Mini Test 2 — Physics (Kinematics + Laws of Motion)', sub:'10 questions, 1 hr, timed' },
+    { text:'Mini Test 3 — Chemistry (Chemical Bonding)', sub:'10 questions, 45 min, timed' },
+    { text:'Analysis: Calculate score and accuracy per subject', sub:'' },
+    { text:'Analysis: List every wrong question + concept gap', sub:'' },
+    { text:'Re-study: Top 3 weakest concepts from test', sub:'2 hrs of targeted revision' },
+    { text:'Update error log with test mistakes', sub:'' },
+  ]},
 
-  const PHASE_TASKS = {
-    phase1: ['t1','t2','t3','t4','t5','t6','t7','t8','t9','t10','t11','t12','t13','t14'],
-    phase2: ['t15','t16','t17','t18'],
-    phase3: ['t19','t20','t21','t22','t23','t24'],
-  };
+  // WEEK 2
+  { day:8, subject:'math', title:'Permutations & Combinations', tasks:[
+    { text:'Watch lecture: Fundamental principle of counting', sub:'Allen / PW — 1.5 hrs' },
+    { text:'Watch lecture: Permutations — nPr, circular, with repetition', sub:'1 hr' },
+    { text:'Watch lecture: Combinations — nCr, division into groups', sub:'1 hr' },
+    { text:'Notes: All formulas + standard cases', sub:'' },
+    { text:'Notes: Selection vs arrangement — how to identify', sub:'' },
+    { text:'PYQs: P&C 2020–2024', sub:'15 questions' },
+    { text:'PYQs: P&C 2015–2019', sub:'15 questions' },
+    { text:'Solve: 5 word/number arrangement problems', sub:'' },
+    { text:'Error log + revision', sub:'' },
+  ]},
+  { day:9, subject:'math', title:'Probability', tasks:[
+    { text:'Watch lecture: Classical probability, sample space, events', sub:'1 hr' },
+    { text:'Watch lecture: Conditional probability, multiplication theorem', sub:'1 hr' },
+    { text:'Watch lecture: Bayes\' theorem', sub:'45 min' },
+    { text:'Watch lecture: Bernoulli trials, Binomial distribution', sub:'45 min' },
+    { text:'Notes: All formulas with examples', sub:'' },
+    { text:'PYQs: Probability 2020–2024', sub:'15 questions' },
+    { text:'PYQs: Probability 2015–2019', sub:'15 questions' },
+    { text:'Error log + revision', sub:'' },
+  ]},
+  { day:10, subject:'physics', title:'Work, Energy & Power', tasks:[
+    { text:'Watch lecture: Work done by constant and variable force', sub:'1.5 hrs' },
+    { text:'Watch lecture: Work-Energy theorem, KE, PE', sub:'1 hr' },
+    { text:'Watch lecture: Conservative forces, potential energy, power', sub:'1 hr' },
+    { text:'Notes: Work-Energy theorem proof + applications', sub:'' },
+    { text:'Notes: Elastic and inelastic collisions (1D and 2D)', sub:'' },
+    { text:'PYQs: WEP 2020–2024', sub:'15 questions' },
+    { text:'PYQs: WEP 2015–2019', sub:'15 questions' },
+    { text:'Error log + revision', sub:'' },
+  ]},
+  { day:11, subject:'chem', title:'Periodic Table & Periodicity', tasks:[
+    { text:'Watch lecture: Trends — atomic radius, ionic radius', sub:'1.5 hrs' },
+    { text:'Watch lecture: Ionisation energy + anomalies (Be/B, N/O)', sub:'1 hr' },
+    { text:'Watch lecture: Electron affinity, electronegativity trends', sub:'1 hr' },
+    { text:'Notes: All periodic trends table (memorise direction)', sub:'' },
+    { text:'Notes: Diagonal relationship, inert pair effect', sub:'' },
+    { text:'PYQs: Periodic Table 2020–2024', sub:'15 questions' },
+    { text:'PYQs: Periodic Table 2015–2019', sub:'15 questions' },
+    { text:'Error log + revision', sub:'' },
+  ]},
+  { day:12, subject:'physics', title:'Rotational Motion', tasks:[
+    { text:'Watch lecture: Angular velocity, acceleration, torque', sub:'2 hrs — heaviest Physics topic' },
+    { text:'Watch lecture: Moment of Inertia + Parallel/Perpendicular axis theorems', sub:'1 hr' },
+    { text:'Watch lecture: Rolling without slipping', sub:'1 hr' },
+    { text:'Notes: MOI table — ring, disc, sphere, rod, hollow sphere', sub:'Memorise all cases' },
+    { text:'Notes: Angular momentum conservation problems', sub:'' },
+    { text:'PYQs: Rotational Motion 2020–2024', sub:'15 questions' },
+    { text:'PYQs: Rotational Motion 2015–2019', sub:'15 questions' },
+    { text:'Error log + revision', sub:'' },
+  ]},
+  { day:13, subject:'chem', title:'p-Block: Groups 15, 16, 17', tasks:[
+    { text:'Watch lecture: Group 15 — N, P, As compounds + reactions', sub:'1.5 hrs — most asked block' },
+    { text:'Watch lecture: Group 16 — O, S, ozone, H₂SO₄', sub:'1 hr' },
+    { text:'Watch lecture: Group 17 — Halogens, HX acids, interhalogen', sub:'1 hr' },
+    { text:'Notes: Oxoacids of N and P (all structures)', sub:'' },
+    { text:'Notes: Allotropes of O, S, P (structures + properties)', sub:'' },
+    { text:'PYQs: p-Block Gr 15–17 2020–2024', sub:'15 questions' },
+    { text:'PYQs: p-Block Gr 15–17 2015–2019', sub:'15 questions' },
+    { text:'Error log + revision', sub:'' },
+  ]},
+  { day:14, subject:'test', title:'Week 2 Mini Test', tasks:[
+    { text:'Mini Test — Maths (P&C + Probability)', sub:'15 questions, 1.5 hrs, timed' },
+    { text:'Mini Test — Physics (WEP + Rotational)', sub:'10 questions, 1 hr, timed' },
+    { text:'Mini Test — Chemistry (Periodic Table + p-block 15–17)', sub:'10 questions, 45 min, timed' },
+    { text:'Calculate marks and accuracy per subject', sub:'' },
+    { text:'Identify every wrong concept + mark in notes', sub:'' },
+    { text:'Re-study 3 weakest topics from test', sub:'2 hrs' },
+    { text:'Update error log', sub:'' },
+  ]},
 
-  const TASK_META = {
-    t1:  { date: '2026-04-26', title: 'Matrices — Part 1', sub: 'Types, addition, subtraction, multiplication, transpose, symmetric + 10 Qs' },
-    t2:  { date: '2026-04-27', title: 'Matrices — Part 2', sub: 'Invertible matrices, elementary row operations + 20 practice problems' },
-    t3:  { date: '2026-04-28', title: 'Solutions — Part 1', sub: 'Molarity, molality, mole fraction, normality · NCERT read + notes' },
-    t4:  { date: '2026-04-29', title: 'Solutions — Part 2', sub: 'Colligative properties: vapour pressure, boiling pt elevation, osmotic pressure + 15 Qs' },
-    t5:  { date: '2026-04-30', title: 'Relations & Functions — Part 1', sub: 'Types of relations, reflexive / symmetric / transitive, equivalence relations' },
-    t6:  { date: '2026-05-01', title: 'Relations & Functions — Part 2', sub: 'One-one, onto, bijective, composition, inverse functions + 15 Qs' },
-    t7:  { date: '2026-05-02', title: 'Electrochemistry — Part 1', sub: 'Galvanic cells, standard electrode potential, EMF, Nernst equation' },
-    t8:  { date: '2026-05-03', title: 'Electrochemistry — Part 2', sub: 'Electrolysis, Faraday laws, conductance, Kohlrausch law + 15 Qs' },
-    t9:  { date: '2026-05-04', title: 'Electric Charges & Fields — Part 1', sub: "Coulomb's law, superposition, electric field, field lines, Gauss's law" },
-    t10: { date: '2026-05-05', title: 'Electric Charges & Fields — Part 2', sub: "Applications of Gauss's law, electric dipole + 15 numericals" },
-    t11: { date: '2026-05-06', title: 'Chemical Kinetics — Part 1', sub: 'Rate of reaction, rate law, order, molecularity, integrated rate equations' },
-    t12: { date: '2026-05-07', title: 'Chemical Kinetics — Part 2', sub: 'Arrhenius equation, activation energy, half-life, temp dependence + 15 Qs' },
-    t13: { date: '2026-05-08', title: 'Electric Potential & Capacitance — Part 1', sub: 'Potential, potential energy, equipotential surfaces, relation with E field' },
-    t14: { date: '2026-05-09', title: 'Electric Potential & Capacitance — Part 2', sub: 'Capacitors, series/parallel combos, energy stored, dielectrics + 15 Qs' },
-    t15: { date: '2026-05-10', title: 'Determinants — Part 1', sub: 'Properties, expansion along rows/cols, minors, cofactors, adjoint' },
-    t16: { date: '2026-05-11', title: 'Determinants — Part 2', sub: 'Inverse via adjoint, Cramer\'s rule, solve linear equations + 20 problems' },
-    t17: { date: '2026-05-12', title: 'Full Maths mega revision', sub: 'All 3 chapters mixed — 30 questions timed, formula sheet review' },
-    t18: { date: '2026-05-12', title: 'Physics formula card only', sub: 'No new topics. Formula sheet + sleep by 10:30 PM' },
-    t19: { date: '2026-05-13', title: '⚡ PHYSICS EXAM — 7:30 AM', sub: 'Electric Charges & Fields + Electric Potential & Capacitance' },
-    t20: { date: '2026-05-13', title: 'Chemistry formula prep (post-Physics exam)', sub: 'Nernst eq, rate law, colligative formulas — light revision only, rest early' },
-    t21: { date: '2026-05-13', title: 'Chemistry final revision', sub: 'Reactions + formulas only — Nernst eq, rate law, colligative formulas' },
-    t22: { date: '2026-05-14', title: '🧪 CHEMISTRY EXAM — 7:30 AM', sub: 'Solutions + Electrochemistry + Chemical Kinetics' },
-    t23: { date: '2026-05-15', title: 'Maths — 20 problems/day', sub: 'Mixed: Relations & Functions, Matrices, Determinants · focus on shortcuts' },
-    t24: { date: '2026-05-18', title: '📐 MATHS EXAM — 7:30 AM', sub: 'Relations & Functions + Matrices + Determinants' },
-  };
+  // WEEK 3
+  { day:15, subject:'math', title:'Matrices & Determinants', tasks:[
+    { text:'Watch lecture: Matrix operations, types, transpose', sub:'1.5 hrs — very high JEE weightage' },
+    { text:'Watch lecture: Determinant — properties, cofactor, adjoint', sub:'1.5 hrs' },
+    { text:'Watch lecture: Inverse of matrix, Cramer\'s rule, rank', sub:'1 hr' },
+    { text:'Notes: Determinant properties (all 8 properties)', sub:'Memorise' },
+    { text:'Notes: System of equations — consistent/inconsistent conditions', sub:'' },
+    { text:'PYQs: Matrices & Determinants 2020–2024', sub:'15 questions' },
+    { text:'PYQs: Matrices & Determinants 2015–2019', sub:'15 questions' },
+    { text:'Error log + revision', sub:'' },
+  ]},
+  { day:16, subject:'physics', title:'Electrostatics', tasks:[
+    { text:'Watch lecture: Coulomb\'s law, superposition principle', sub:'1.5 hrs — highest EM weightage' },
+    { text:'Watch lecture: Electric field, field lines, dipole', sub:'1.5 hrs' },
+    { text:'Watch lecture: Gauss\'s law + all standard applications', sub:'1 hr' },
+    { text:'Watch lecture: Electric potential, equipotential surfaces', sub:'1 hr' },
+    { text:'Notes: Gauss law applications (sphere, cylinder, sheet)', sub:'Memorise all cases' },
+    { text:'PYQs: Electrostatics 2020–2024', sub:'15 questions' },
+    { text:'PYQs: Electrostatics 2015–2019', sub:'15 questions' },
+    { text:'Error log + revision', sub:'' },
+  ]},
+  { day:17, subject:'chem', title:'p-Block Gr 13–14 + s-Block', tasks:[
+    { text:'Watch lecture: Group 13 — B, Al anomalous behaviour', sub:'1.5 hrs' },
+    { text:'Watch lecture: Group 14 — C, Si, allotropes, silicates', sub:'1 hr' },
+    { text:'Watch lecture: s-Block — alkali metals, alkaline earth, diagonal relationship', sub:'1.5 hrs' },
+    { text:'Notes: Anomalous behaviour of Li/Be vs group', sub:'' },
+    { text:'Notes: Cement, glass, silicate structures (brief)', sub:'' },
+    { text:'PYQs: s-block + p-block 13–14 2020–2024', sub:'15 questions' },
+    { text:'PYQs: s-block + p-block 13–14 2015–2019', sub:'15 questions' },
+    { text:'Error log + revision', sub:'' },
+  ]},
+  { day:18, subject:'math', title:'Binomial Theorem', tasks:[
+    { text:'Watch lecture: Binomial expansion, general term (Tr+1)', sub:'1.5 hrs' },
+    { text:'Watch lecture: Middle term, numerically greatest term', sub:'1 hr' },
+    { text:'Watch lecture: Coefficient tricks, multinomial expansion', sub:'1 hr' },
+    { text:'Notes: All standard binomial identities', sub:'' },
+    { text:'Notes: Properties of binomial coefficients', sub:'' },
+    { text:'PYQs: Binomial Theorem 2020–2024', sub:'15 questions' },
+    { text:'PYQs: Binomial Theorem 2015–2019', sub:'15 questions' },
+    { text:'Error log + revision', sub:'' },
+  ]},
+  { day:19, subject:'physics', title:'Current Electricity', tasks:[
+    { text:'Watch lecture: Drift velocity, current, Ohm\'s law', sub:'1.5 hrs' },
+    { text:'Watch lecture: Resistivity, Kirchhoff\'s laws (KCL, KVL)', sub:'1.5 hrs' },
+    { text:'Watch lecture: Wheatstone bridge, potentiometer, RC circuits', sub:'1 hr' },
+    { text:'Notes: Kirchhoff\'s law solving method (step-by-step)', sub:'' },
+    { text:'Notes: Equivalent resistance — series, parallel, complex networks', sub:'' },
+    { text:'PYQs: Current Electricity 2020–2024', sub:'15 questions' },
+    { text:'PYQs: Current Electricity 2015–2019', sub:'15 questions' },
+    { text:'Error log + revision', sub:'' },
+  ]},
+  { day:20, subject:'chem', title:'Coordination Compounds', tasks:[
+    { text:'Watch lecture: IUPAC nomenclature rules + 10 practice examples', sub:'1.5 hrs — JEE loves this' },
+    { text:'Watch lecture: VBT — inner/outer orbital complexes, magnetic moment', sub:'1.5 hrs' },
+    { text:'Watch lecture: CFT — crystal field splitting, CFSE calculation', sub:'1 hr' },
+    { text:'Notes: Isomerism in coordination compounds (all types)', sub:'' },
+    { text:'Notes: Stability of complexes, EAN rule', sub:'' },
+    { text:'PYQs: Coordination Compounds 2020–2024', sub:'15 questions' },
+    { text:'PYQs: Coordination Compounds 2015–2019', sub:'15 questions' },
+    { text:'Error log + revision', sub:'' },
+  ]},
+  { day:21, subject:'test', title:'Week 3 Mini Test', tasks:[
+    { text:'Mini Test — Maths (Matrices + Binomial)', sub:'15 questions, 1.5 hrs, timed' },
+    { text:'Mini Test — Physics (Electrostatics + Current Electricity)', sub:'10 questions, 1 hr' },
+    { text:'Mini Test — Chemistry (Coord. Compounds + s/p block)', sub:'10 questions, 45 min' },
+    { text:'Score analysis — compare with Week 1 and 2 tests', sub:'Track improvement' },
+    { text:'Re-study 3 weakest topics', sub:'2 hrs' },
+    { text:'Update error log', sub:'' },
+  ]},
 
-  const LS_KEY = 'totqa_s2_progress';
+  // WEEK 4
+  { day:22, subject:'math', title:'Limits, Continuity & Differentiability', tasks:[
+    { text:'Watch lecture: Limits — L\'Hôpital, standard forms (0/0, ∞/∞)', sub:'2 hrs' },
+    { text:'Watch lecture: Sandwich theorem, algebra of limits', sub:'1 hr' },
+    { text:'Watch lecture: Continuity and differentiability conditions', sub:'1 hr' },
+    { text:'Notes: Standard limits to memorise (sinx/x, (1+1/n)^n, etc.)', sub:'' },
+    { text:'Notes: Types of discontinuity (jump, removable, infinite)', sub:'' },
+    { text:'PYQs: LCD 2020–2024', sub:'15 questions' },
+    { text:'PYQs: LCD 2015–2019', sub:'15 questions' },
+    { text:'Error log + revision', sub:'' },
+  ]},
+  { day:23, subject:'physics', title:'Optics (Ray + Wave)', tasks:[
+    { text:'Watch lecture: Reflection — spherical mirrors, sign convention', sub:'1.5 hrs' },
+    { text:'Watch lecture: Refraction, TIR, lenses, lens maker\'s equation', sub:'1.5 hrs' },
+    { text:'Watch lecture: Wave optics — YDSE, interference, diffraction', sub:'1 hr' },
+    { text:'Notes: Mirror formula, lens formula, power of lens', sub:'' },
+    { text:'Notes: YDSE fringe width formula + derivation', sub:'' },
+    { text:'PYQs: Optics 2020–2024', sub:'15 questions' },
+    { text:'PYQs: Optics 2015–2019', sub:'15 questions' },
+    { text:'Error log + revision', sub:'' },
+  ]},
+  { day:24, subject:'chem', title:'Inorganic Full Revision', tasks:[
+    { text:'Flash-card drill: Chemical Bonding — all hybridisation cases', sub:'30 min — from memory' },
+    { text:'Flash-card drill: Periodic trends — all anomalies', sub:'30 min' },
+    { text:'Flash-card drill: p-block reactions (Groups 15, 16, 17)', sub:'45 min' },
+    { text:'Flash-card drill: s-block + p-block 13–14 anomalies', sub:'30 min' },
+    { text:'Flash-card drill: Coordination compounds — nomenclature 20 examples', sub:'45 min' },
+    { text:'PYQs: Mixed Inorganic 2020–2024 (unseen mix)', sub:'20 questions' },
+    { text:'Metallurgy basics (Blast furnace, Hall-Heroult, Van Arkel)', sub:'45 min reading' },
+    { text:'Salt analysis — radicals and confirmatory tests', sub:'30 min reading' },
+    { text:'Error log + notes update', sub:'' },
+  ]},
+  { day:25, subject:'math', title:'Application of Derivatives', tasks:[
+    { text:'Watch lecture: Tangent and normal to a curve', sub:'1 hr' },
+    { text:'Watch lecture: Maxima and minima — first and second derivative test', sub:'1.5 hrs' },
+    { text:'Watch lecture: Rolle\'s theorem, LMVT, rate of change', sub:'1 hr' },
+    { text:'Notes: Second derivative test for maxima/minima', sub:'' },
+    { text:'Notes: Increasing/decreasing function intervals', sub:'' },
+    { text:'PYQs: AOD 2020–2024', sub:'15 questions' },
+    { text:'PYQs: AOD 2015–2019', sub:'15 questions' },
+    { text:'Error log + revision', sub:'' },
+  ]},
+  { day:26, subject:'physics', title:'Modern Physics', tasks:[
+    { text:'Watch lecture: Photoelectric effect, Einstein\'s equation', sub:'1.5 hrs — high scoring + factual' },
+    { text:'Watch lecture: Bohr model — energy levels, wavelength formula', sub:'1.5 hrs' },
+    { text:'Watch lecture: Nuclear physics — binding energy, radioactivity, Q value', sub:'1 hr' },
+    { text:'Notes: All Bohr model formulas (energy, radius, velocity)', sub:'Memorise' },
+    { text:'Notes: Radioactive decay law + half-life formula', sub:'' },
+    { text:'PYQs: Modern Physics 2020–2024', sub:'15 questions' },
+    { text:'PYQs: Modern Physics 2015–2019', sub:'15 questions' },
+    { text:'Error log + revision', sub:'' },
+  ]},
+  { day:27, subject:'chem', title:'Organic Bonus: GOC + Hydrocarbons', tasks:[
+    { text:'Watch lecture: Inductive effect (+I, -I groups)', sub:'Only do this if Inorganic is fully solid — 1 hr' },
+    { text:'Watch lecture: Resonance and hyperconjugation', sub:'1 hr' },
+    { text:'Watch lecture: Reaction intermediates (carbocation, carbanion, free radical)', sub:'1 hr' },
+    { text:'Notes: GOC effects comparison table', sub:'' },
+    { text:'Watch lecture: Hydrocarbons — alkane (halogenation), alkene (Markovnikov, ozonolysis)', sub:'1.5 hrs' },
+    { text:'PYQs: GOC 2020–2024', sub:'10 questions' },
+    { text:'PYQs: Hydrocarbons 2020–2024', sub:'10 questions' },
+    { text:'Error log + revision', sub:'' },
+  ]},
+  { day:28, subject:'test', title:'Full Mock Test (3 hrs)', tasks:[
+    { text:'Full JEE mock — 75 questions (Maths 25 + Physics 25 + Chem 25)', sub:'Strict 3 hrs, exam conditions, no phone' },
+    { text:'Mark the paper immediately after', sub:'Official marking scheme: +4, -1' },
+    { text:'Analysis: Score breakdown by subject', sub:'' },
+    { text:'Analysis: Score breakdown by chapter', sub:'Which chapters cost you the most?' },
+    { text:'Analysis: Categorise each wrong answer', sub:'Concept gap / silly mistake / time pressure / guessed' },
+    { text:'Analysis: Time spent per section', sub:'' },
+    { text:'Re-study: Top 5 weakest chapters identified', sub:'2–3 hrs targeted revision' },
+    { text:'Update error log with all mock mistakes', sub:'' },
+  ]},
+  { day:29, subject:'rev', title:'Targeted Revision Day', tasks:[
+    { text:'Maths: Go through entire error log (Days 1–28)', sub:'1.5 hrs — every wrong answer' },
+    { text:'Maths: Formula sheet drill — all 9 chapters', sub:'30 min from memory' },
+    { text:'Physics: Error log revision', sub:'1.5 hrs' },
+    { text:'Physics: Formula sheet drill', sub:'30 min from memory' },
+    { text:'Inorganic: Full cycle — bonding → periodic → p-block → s-block → coordination', sub:'1.5 hrs flash-card mode' },
+    { text:'Mock analysis reflection: What am I doing in the exam hall?', sub:'Time allocation strategy, attempt order' },
+    { text:'Sleep by 10pm. No new problems today.', sub:'Your brain consolidates during sleep.' },
+  ]},
+  { day:30, subject:'rev', title:'Final Sprint Day', tasks:[
+    { text:'Maths speed drill: 30 PYQs — mixed from all 9 chapters', sub:'Time yourself: 50 min' },
+    { text:'Physics speed drill: 30 PYQs — mixed from all 8 chapters', sub:'Time yourself: 50 min' },
+    { text:'Chemistry speed drill: 20 PYQs — Inorganic rapid fire', sub:'Time yourself: 30 min' },
+    { text:'Read your complete error log one last time', sub:'Only read — no new problems' },
+    { text:'Write your exam strategy on paper (time per section, order)', sub:'Stick it somewhere visible' },
+    { text:'Pack everything you need for exam day', sub:'Admit card, stationery, ID proof' },
+    { text:'Eat well. Sleep by 10pm. You have done the work.', sub:'Trust the process. Destruction achieved.' },
+  ]},
+];
 
-  // ─── STATE ──────────────────────────────────────────────────────────────
-  function loadState() {
-    try { return JSON.parse(localStorage.getItem(LS_KEY)) || {}; } catch { return {}; }
+const WEEKS = [
+  { label: 'Week 1', days: [0,6] },
+  { label: 'Week 2', days: [7,13] },
+  { label: 'Week 3', days: [14,20] },
+  { label: 'Week 4', days: [21,29] },
+];
+
+let state = JSON.parse(localStorage.getItem('jee-plan-v2') || '{}');
+
+function saveState() { localStorage.setItem('jee-plan-v2', JSON.stringify(state)); }
+
+function getKey(dayIdx, taskIdx) { return `d${dayIdx}_t${taskIdx}`; }
+
+function getTotalStats() {
+  const total = PLAN.reduce((a, d) => a + d.tasks.length, 0);
+  const done = Object.values(state).filter(Boolean).length;
+  const daysDone = PLAN.filter((d, di) => d.tasks.every((_, ti) => state[getKey(di, ti)])).length;
+  return { total, done, daysDone };
+}
+
+function getDayProgress(dayIdx) {
+  const tasks = PLAN[dayIdx].tasks;
+  const done = tasks.filter((_, ti) => state[getKey(dayIdx, ti)]).length;
+  return { done, total: tasks.length };
+}
+
+function updateGlobalStats() {
+  const { total, done, daysDone } = getTotalStats();
+  document.getElementById('total-done').textContent = done;
+  document.getElementById('total-pct').textContent = Math.round(done/total*100) + '%';
+  document.getElementById('days-done').textContent = daysDone;
+  document.getElementById('progress-text').textContent = `${done} / ${total} tasks`;
+  document.getElementById('main-progress').style.width = (done/total*100) + '%';
+  const streak = calcStreak();
+  document.getElementById('streak-count').textContent = streak + ' day' + (streak !== 1 ? 's' : '');
+}
+
+function calcStreak() {
+  let streak = 0;
+  for (let i = 0; i < PLAN.length; i++) {
+    const { done, total } = getDayProgress(i);
+    if (done === total && total > 0) streak++;
+    else break;
   }
-  function saveState(state) {
-    localStorage.setItem(LS_KEY, JSON.stringify(state));
-  }
+  return streak;
+}
 
-  // ─── TOGGLE ─────────────────────────────────────────────────────────────
-  function toggle(id) {
-    const state = loadState();
-    state[id] = !state[id];
-    saveState(state);
-    applyState(state);
+function updateRing(dayIdx) {
+  const { done, total } = getDayProgress(dayIdx);
+  const pct = done / total;
+  const r = 10, circ = 2 * Math.PI * r;
+  const fill = document.querySelector(`#ring-fill-${dayIdx}`);
+  const txt = document.querySelector(`#ring-text-${dayIdx}`);
+  if (fill) fill.style.strokeDashoffset = circ - (circ * pct);
+  if (txt) txt.textContent = Math.round(pct*100) + '%';
+  const card = document.getElementById(`day-card-${dayIdx}`);
+  if (card) {
+    if (done === total) card.classList.add('completed');
+    else card.classList.remove('completed');
   }
+}
 
-  // ─── TODAY ──────────────────────────────────────────────────────────────
-  function todayStr() {
-    const d = new Date();
-    const y = d.getFullYear();
-    const m = String(d.getMonth() + 1).padStart(2, '0');
-    const day = String(d.getDate()).padStart(2, '0');
-    return `${y}-${m}-${day}`;
-  }
+function toggleTask(dayIdx, taskIdx) {
+  const key = getKey(dayIdx, taskIdx);
+  state[key] = !state[key];
+  saveState();
 
-  function daysUntil(dateStr) {
-    const now = new Date();
-    now.setHours(0,0,0,0);
-    const target = new Date(dateStr);
-    target.setHours(0,0,0,0);
-    return Math.ceil((target - now) / 86400000);
-  }
-
-  // ─── STREAK ─────────────────────────────────────────────────────────────
-  function calcStreak(state) {
-    const today = new Date(); today.setHours(0,0,0,0);
-    let streak = 0;
-    // Walk backwards from today, check if any task on that date is done
-    for (let i = 0; i < 30; i++) {
-      const d = new Date(today); d.setDate(d.getDate() - i);
-      const ds = d.toISOString().slice(0, 10);
-      const tasksOnDay = TASKS.filter(id => TASK_META[id] && TASK_META[id].date === ds);
-      if (tasksOnDay.length === 0) { if (i === 0) continue; break; }
-      const anyDone = tasksOnDay.some(id => state[id]);
-      if (anyDone) streak++;
-      else if (i > 0) break; // gap in streak
+  const item = document.getElementById(`task-${dayIdx}-${taskIdx}`);
+  if (item) {
+    item.classList.toggle('done', state[key]);
+    if (state[key]) {
+      const flash = document.createElement('div');
+      flash.className = 'task-done-flash';
+      item.appendChild(flash);
+      setTimeout(() => flash.remove(), 400);
     }
-    return streak;
   }
 
-  // ─── APPLY STATE ────────────────────────────────────────────────────────
-  function applyState(state) {
-    const today = todayStr();
-    let done = 0;
-    let todayTask = null;
+  updateRing(dayIdx);
+  updateGlobalStats();
 
-    TASKS.forEach(id => {
-      const row = document.getElementById(id);
-      if (!row) return;
+  const { done, total } = getDayProgress(dayIdx);
+  if (done === total) {
+    showToast(`🔥 Day ${dayIdx+1} complete! Destruction in progress.`);
+    spawnConfetti();
+  }
+}
 
-      // done styling
-      if (state[id]) { row.classList.add('done'); done++; }
-      else row.classList.remove('done');
+function toggleDay(dayIdx) {
+  const card = document.getElementById(`day-card-${dayIdx}`);
+  if (card) card.classList.toggle('open');
+}
 
-      // today highlight
-      const meta = TASK_META[id];
-      if (meta && meta.date === today) {
-        row.classList.add('is-today');
-        // inject today tag if not already there
-        const titleEl = row.querySelector('.task-title');
-        if (titleEl && !titleEl.querySelector('.today-tag')) {
-          const tag = document.createElement('span');
-          tag.className = 'today-tag';
-          tag.textContent = 'TODAY';
-          titleEl.appendChild(tag);
-        }
-        if (!todayTask) todayTask = meta;
-      } else {
-        row.classList.remove('is-today');
-      }
-    });
+function showTab(weekIdx) {
+  document.querySelectorAll('.week-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.week-tab').forEach(b => b.classList.remove('active'));
+  document.getElementById(`week-sec-${weekIdx}`).classList.add('active');
+  document.getElementById(`week-tab-${weekIdx}`).classList.add('active');
+}
 
-    // progress bar
-    const pct = Math.round((done / TASKS.length) * 100);
-    document.getElementById('prog-fill').style.width = pct + '%';
-    document.getElementById('prog-text').textContent = done + ' / ' + TASKS.length + ' done';
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
 
-    // phase mini-progress
-    Object.entries(PHASE_TASKS).forEach(([phase, ids], i) => {
-      const pDone = ids.filter(id => state[id]).length;
-      const el = document.getElementById('pp' + (i + 1));
-      if (el) el.textContent = pDone + '/' + ids.length;
-    });
+function spawnConfetti() {
+  const colors = ['#4facfe','#43e97b','#f7971e','#f953c6','#a78bfa'];
+  for (let i = 0; i < 18; i++) {
+    const c = document.createElement('div');
+    c.className = 'confetti-piece';
+    c.style.cssText = `left:${Math.random()*100}vw;top:${Math.random()*40+10}vh;background:${colors[i%colors.length]};animation-duration:${0.8+Math.random()*0.8}s;animation-delay:${Math.random()*0.3}s;transform:rotate(${Math.random()*360}deg)`;
+    document.body.appendChild(c);
+    setTimeout(() => c.remove(), 1200);
+  }
+}
 
-    // today banner
-    if (todayTask) {
-      document.getElementById('today-title').textContent = todayTask.title;
-      document.getElementById('today-sub').textContent = todayTask.sub;
-    } else if (today > '2026-05-18') {
-      document.getElementById('today-title').textContent = 'All exams done!';
-      document.getElementById('today-sub').textContent = 'Season 2 complete. 🎉';
-    } else if (today < '2026-04-26') {
-      document.getElementById('today-title').textContent = 'Plan starts Apr 26';
-      document.getElementById('today-sub').textContent = 'Come back on Apr 26 to begin!';
-    } else {
-      document.getElementById('today-title').textContent = 'No task scheduled today';
-      document.getElementById('today-sub').textContent = 'Rest day or free revision — keep the streak!';
+function badgeClass(subject) {
+  return { math:'badge-math', physics:'badge-physics', chem:'badge-chem', test:'badge-test', rev:'badge-rev' }[subject] || 'badge-rev';
+}
+function badgeLabel(subject) {
+  return { math:'MATHS', physics:'PHYSICS', chem:'CHEM', test:'TEST DAY', rev:'REVISION' }[subject] || subject.toUpperCase();
+}
+function subjectClass(subject) {
+  return `day-${subject}`;
+}
+
+function buildUI() {
+  // Tabs
+  const tabsEl = document.getElementById('week-tabs');
+  const containerEl = document.getElementById('weeks-container');
+  tabsEl.innerHTML = '';
+  containerEl.innerHTML = '';
+
+  WEEKS.forEach((week, wi) => {
+    const btn = document.createElement('button');
+    btn.className = 'week-tab' + (wi === 0 ? ' active' : '');
+    btn.id = `week-tab-${wi}`;
+    btn.textContent = week.label;
+    btn.onclick = () => showTab(wi);
+    tabsEl.appendChild(btn);
+
+    const sec = document.createElement('div');
+    sec.className = 'week-section' + (wi === 0 ? ' active' : '');
+    sec.id = `week-sec-${wi}`;
+    sec.innerHTML = `<div class="days-grid"></div>`;
+    const grid = sec.querySelector('.days-grid');
+
+    for (let di = week.days[0]; di <= week.days[1]; di++) {
+      const d = PLAN[di];
+      const { done, total } = getDayProgress(di);
+      const pct = done / total;
+      const r = 10, circ = 2 * Math.PI * r;
+      const offset = circ - (circ * pct);
+
+      const card = document.createElement('div');
+      card.className = `day-card ${subjectClass(d.subject)}${done===total ? ' completed' : ''}`;
+      card.id = `day-card-${di}`;
+      card.style.animationDelay = `${(di - week.days[0]) * 0.06}s`;
+
+      const tasksHtml = d.tasks.map((t, ti) => `
+        <div class="task-item${state[getKey(di,ti)] ? ' done' : ''}" id="task-${di}-${ti}" onclick="toggleTask(${di},${ti})">
+          <div class="task-check">
+            <svg class="check-svg" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1.5 5L4 7.5L8.5 2.5" stroke="#0a0a0f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="task-text-wrap">
+            <div class="task-text">${t.text}</div>
+            ${t.sub ? `<div class="task-sub">${t.sub}</div>` : ''}
+          </div>
+        </div>
+      `).join('');
+
+      card.innerHTML = `
+        <div class="day-card-header" onclick="toggleDay(${di})">
+          <div class="day-circle">${String(di+1).padStart(2,'0')}</div>
+          <div class="day-info">
+            <div class="day-num-label">Day ${di+1} &nbsp;·&nbsp; <span class="subject-badge ${badgeClass(d.subject)}">${badgeLabel(d.subject)}</span></div>
+            <div class="day-title-text">${d.title}</div>
+          </div>
+          <div class="day-header-right">
+            <svg class="day-progress-ring" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+              <circle class="ring-bg" cx="15" cy="15" r="${r}"/>
+              <circle id="ring-fill-${di}" class="ring-fill" cx="15" cy="15" r="${r}"
+                style="stroke-dasharray:${circ};stroke-dashoffset:${offset}"/>
+              <text id="ring-text-${di}" class="ring-text" x="15" y="15">${Math.round(pct*100)}%</text>
+            </svg>
+            <svg class="chevron-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </div>
+        <div class="task-list">
+          <div class="task-section-label">tasks — ${total} items</div>
+          ${tasksHtml}
+          <div class="day-footer">
+            <span class="day-footer-text">${done} / ${total} complete</span>
+            <span class="day-footer-text">${done===total ? '✓ cleared' : Math.round(pct*100)+'% done'}</span>
+          </div>
+        </div>
+      `;
+      grid.appendChild(card);
     }
+    containerEl.appendChild(sec);
+  });
 
-    // streak
-    const streak = calcStreak(state);
-    const streakEl = document.getElementById('streak-display');
-    if (streak > 0) streakEl.textContent = streak + ' 🔥';
-    else streakEl.textContent = '—';
-  }
+  updateGlobalStats();
+}
 
-  // ─── PHASE TOGGLE ───────────────────────────────────────────────────────
-  function togglePhase(id) {
-    document.getElementById(id).classList.toggle('collapsed');
-  }
-
-  // ─── RESET ──────────────────────────────────────────────────────────────
-  function resetAll() {
-    if (!confirm('Reset all progress? This cannot be undone.')) return;
-    saveState({});
-    applyState({});
-  }
-
-  // ─── COUNTDOWNS ─────────────────────────────────────────────────────────
-  function updateCountdowns() {
-    const phyDays = daysUntil('2026-05-13');
-    const chemDays = daysUntil('2026-05-14');
-    const mathDays = daysUntil('2026-05-18');
-
-    const fmt = (d) => d <= 0 ? 'TODAY' : d + 'd';
-
-    document.getElementById('cd-phy').textContent = fmt(phyDays);
-    document.getElementById('cd-chem').textContent = fmt(chemDays);
-    document.getElementById('cd-math').textContent = fmt(mathDays);
-
-    document.getElementById('ec-phy').textContent = phyDays <= 0 ? 'TODAY' : phyDays + ' days';
-    document.getElementById('ec-chem').textContent = chemDays <= 0 ? 'TODAY' : chemDays + ' days';
-    document.getElementById('ec-math').textContent = mathDays <= 0 ? 'TODAY' : mathDays + ' days';
-  }
-
-  // ─── INIT ────────────────────────────────────────────────────────────────
-  updateCountdowns();
-  applyState(loadState());
-
-  // Auto-scroll to today's task
-  setTimeout(() => {
-    const todayRow = document.querySelector('.task-row.is-today');
-    if (todayRow) {
-      todayRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-  }, 600);
+buildUI();
 </script>
 </body>
 </html>
